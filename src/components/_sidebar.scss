@@ -1,3 +1,28 @@
-.sidebar{
-    color: bisque;
+
+.sidebar {
+  color: black;
+  width: 200px;
+  height: 100vh;
+  background-color: bisque;
+  
+  h2 {
+    margin: auto 10px 10px 20px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 10px 0 0 20px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
 }
+
+
+

@@ -1,6 +1,17 @@
 @use "./components/sidebar";
+@use "./components/dashboard";
 
-h1{
-    color:aqua;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  overflow: hidden auto;
+  width: 100%;
+  height: auto;
+}
+  

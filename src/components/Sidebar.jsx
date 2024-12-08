@@ -3,8 +3,14 @@ import React from "react";
 function Sidebar() {
   return (
     <>
-      <div>Sidebar</div>
-      <div>Sidebar</div>
+        <div className="sidebar">
+          <h2>Dashboard</h2>
+          <ul>
+            <li>Penjualan</li>
+            <li>Produk</li>
+            <li>Pegawai</li>
+          </ul>
+        </div>
     </>
   );
 }
