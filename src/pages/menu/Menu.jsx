@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import menuData from "../../data/menu.json";
 
 function Menu() {
   const [menu, setMenu] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const localStorageData = JSON.parse(localStorage.getItem("products")) || [];
@@ -15,7 +17,15 @@ function Menu() {
   return (
     <Layout>
       <div className="menu">
-        <h2>Daftar Menu</h2>
+        <div className="menu-header">
+          <h2>Daftar Menu</h2>
+          <button
+            className="add-menu-btn"
+            onClick={() => navigate("/tambah-menu")}
+          >
+            Tambah Menu
+          </button>
+        </div>
         <table>
           <thead>
             <tr>
@@ -30,12 +40,12 @@ function Menu() {
           <tbody>
             {menu.map((data, index) => (
               <tr key={index}>
-                <td>{no++}</td>
-                <td>{data.nama || data.name}</td>
-                <td>{data.jenis || data.category}</td>
-                <td>{data.harga || data.price}</td>
-                <td>{data.stok || data.stock}</td>
-                <td>
+                <td data-label="No">{no++}</td>
+                <td data-label="Nama Menu">{data.nama || data.name}</td>
+                <td data-label="Jenis">{data.jenis || data.category}</td>
+                <td data-label="Harga">{data.harga || data.price}</td>
+                <td data-label="Stok">{data.stok || data.stock}</td>
+                <td data-label="Aksi">
                   <button onClick={() => handleDelete(index)}>Hapus</button>
                 </td>
               </tr>

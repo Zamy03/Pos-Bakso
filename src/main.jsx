@@ -4,7 +4,8 @@ import "./main.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/login/Login.jsx";
 import Menu from "./pages/menu/Menu.jsx";
-import Penjualan from "./pages/Penjualan.jsx";
+import Penjualan from "./pages/penjualan/Penjualan.jsx";
+import TambahPenjualan from "./pages/penjualan/TambahPenjualan.jsx";
 import TambahMenu from "./pages/menu/TambahMenu.jsx";
 import Pegawai from "./pages/pegawai/Pegawai.jsx";
 
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/" element={<Login />} />
         <Route path="/menu" element={<Menu />} />
         <Route path="/penjualan" element={<Penjualan />} />
+        <Route path="/tambah-penjualan" element={<TambahPenjualan />} />
         <Route path="/tambah-menu" element={<TambahMenu />} />
         <Route path="/pegawai" element={<Pegawai />} />
       </Routes>

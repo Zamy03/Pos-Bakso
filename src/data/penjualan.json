@@ -1,0 +1,18 @@
+[
+    {
+        "kode_transaksi": "TRX001",
+        "nama_pembeli": "Nuril",
+        "tanggal": "30-11-2024",
+        "produk": [
+            {
+                "nama": "Bakso Komplit",
+                "jumlah": 2
+            },
+            {
+                "nama": "Mie Ayam Bakso",
+                "jumlah": 1
+            }
+        ],
+        "total": 58000
+    }
+]

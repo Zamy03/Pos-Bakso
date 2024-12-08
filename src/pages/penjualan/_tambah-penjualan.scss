@@ -1,4 +1,4 @@
-.add-product-form {
+.add-penjualan-form {
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -26,7 +26,8 @@
       color: #333;
       font-weight: 500;
 
-      input {
+      input,
+      select {
         width: 100%;
         padding: 10px;
         margin-top: 5px;
@@ -36,7 +37,8 @@
         transition: border-color 0.3s ease;
       }
 
-      input:focus {
+      input:focus,
+      select:focus {
         outline: none;
         border-color: #4CAF50;
       }
@@ -60,26 +62,40 @@
         background-color: #388e3c;
       }
     }
+
+    .produk-section {
+      display: flex;
+      gap: 10px;
+
+      select,
+      input {
+        flex: 1;
+      }
+
+      button {
+        flex: 0 0 auto;
+        padding: 0 15px;
+      }
+    }
+
+    .total {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
   }
 
   /* Responsif */
   @media (max-width: 768px) {
-    
-    padding: 15px;
-
-    h2 {
-      font-size: 1.25rem;
-    }
-
     form {
       gap: 10px;
 
       label {
         font-size: 14px;
 
-        input {
+        input,
+        select {
           font-size: 14px;
-          padding: 8px;
         }
       }
 
@@ -87,24 +103,24 @@
         font-size: 14px;
         padding: 10px;
       }
-    }
-  }
 
-  @media (max-width: 480px) {
-    form {
-      label {
-        font-size: 12px;
+      .produk-section {
+        flex-direction: column;
 
+        select,
         input {
-          font-size: 12px;
-          padding: 6px;
+          width: 100%;
+        }
+
+        button {
+          width: 100%;
+          margin-top: 10px;
         }
       }
+    }
 
-      button {
-        font-size: 12px;
-        padding: 8px;
-      }
+    h2 {
+      font-size: 1.25rem;
     }
   }
 }

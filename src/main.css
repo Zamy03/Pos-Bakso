@@ -5,18 +5,36 @@
   color: #ecf0f1;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(0);
+  transition: transform 0.3s ease;
 }
-.layout-dashboard-sidebar h2 {
+
+.layout-dashboard-sidebar.open {
+  transform: translateX(0); /* Sidebar terlihat */
+}
+
+.layout-dashboard-sidebar:not(.open) {
+  transform: translateX(-100%); /* Sidebar tersembunyi */
+}
+
+h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
+  margin-top: 5px;
+  margin-left: 3rem;
   color: #ffffff;
 }
-.layout-dashboard-sidebar ul {
+
+ul {
   list-style: none;
   padding: 0;
 }
-.layout-dashboard-sidebar ul li {
+
+ul li {
   font-size: 18px;
   margin: 10px 0;
   padding: 10px;
@@ -24,11 +42,39 @@
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-.layout-dashboard-sidebar ul li:hover {
+
+ul li:hover {
   background-color: #34495e;
   color: #ecf0f1;
 }
 
+.toggle-sidebar-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background-color: #34495e;
+  color: #ecf0f1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-sidebar-btn:hover {
+  background-color: #2c3e50;
+}
+
+@media (max-width: 768px) {
+  .layout-dashboard-sidebar {
+    width: 200px;
+  }
+  .toggle-sidebar-btn {
+    top: 20px;
+    left: 20px;
+  }
+}
 .login {
   color: #8eb486;
   display: flex;
@@ -104,10 +150,43 @@
   height: auto;
 }
 
+.menu {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /* Media queries untuk layar kecil */
+}
+.menu h2 {
+  margin-bottom: 20px;
+}
+.menu .menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Pastikan tombol dan ikon sejajar */
+  margin-bottom: 20px;
+}
+.menu .menu-header .add-menu-btn {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.menu .menu-header .add-menu-btn:hover {
+  background-color: #34495e;
+  transform: scale(1.05);
+}
+.menu .menu-header .add-menu-btn:active {
+  transform: scale(1);
+}
 .menu table {
   width: 100%;
   border-collapse: collapse;
-  margin: 20px 0;
+  margin-top: 10px;
   font-size: 16px;
   text-align: left;
   border: 1px solid #ddd;
@@ -131,8 +210,45 @@
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
-.menu table th, .menu table td {
+.menu table th,
+.menu table td {
   text-align: center;
+}
+@media (max-width: 768px) {
+  .menu .menu-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .menu .menu-header .add-menu-btn {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .menu table {
+    font-size: 14px;
+  }
+  .menu table thead {
+    display: none;
+  }
+  .menu table tbody tr {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .menu table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .menu table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 50%;
+    text-align: left;
+    display: inline-block;
+  }
 }
 
 .add-product-form {
@@ -143,11 +259,13 @@
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Responsif */
 }
 .add-product-form h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #333;
+  font-size: 1.5rem;
 }
 .add-product-form form {
   display: flex;
@@ -155,6 +273,8 @@
   gap: 15px;
 }
 .add-product-form form label {
+  display: flex;
+  flex-direction: column;
   font-size: 16px;
   color: #333;
   font-weight: 500;
@@ -188,62 +308,347 @@
 .add-product-form form button:active {
   background-color: #388e3c;
 }
+@media (max-width: 768px) {
+  .add-product-form {
+    padding: 15px;
+  }
+  .add-product-form h2 {
+    font-size: 1.25rem;
+  }
+  .add-product-form form {
+    gap: 10px;
+  }
+  .add-product-form form label {
+    font-size: 14px;
+  }
+  .add-product-form form label input {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .add-product-form form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .add-product-form form label {
+    font-size: 12px;
+  }
+  .add-product-form form label input {
+    font-size: 12px;
+    padding: 6px;
+  }
+  .add-product-form form button {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
 
-/* Profile.css */
 .Pegawai {
-  max-width: 50rem; /* Atur lebar maksimum untuk kontainer */
-  margin: 20px auto; /* Pusatkan kontainer */
-  align-items: center;
-  justify-content: center;
-  padding-top: 10rem;
-}
-.Pegawai .profile-container {
-  display: flex; /* Gunakan flexbox untuk tata letak */
-  align-items: flex-start; /* Rata kanan item ke awal */
-}
-.Pegawai .profile-photo {
-  margin-right: 20px; /* Jarak antara foto dan info */
+  max-width: 50rem;
+  margin: 20px auto;
+  padding: 2rem 1rem; /* Jarak dalam untuk layar kecil */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Pusatkan foto */
-  height: 30rem;
+  align-items: center; /* Pusatkan semua elemen */
+  /* Media query untuk layar kecil */
+}
+.Pegawai .profile-container {
+  display: flex;
+  flex-wrap: wrap; /* Izinkan baris baru jika layar kecil */
+  justify-content: center; /* Pusatkan kontainer pada layar kecil */
+  gap: 1.5rem; /* Jarak antar elemen di layar kecil */
+}
+.Pegawai .profile-photo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: auto;
   width: 12rem;
 }
 .Pegawai .profile-image {
-  width: 11rem; /* Lebar penuh untuk gambar */
-  height: 11rem; /* Pertahankan rasio aspek */
+  width: 11rem;
+  height: 11rem;
   border-radius: 50%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 .Pegawai .placeholder-image {
-  width: 100%; /* Lebar penuh untuk placeholder */
-  height: 11rem; /* Tinggi tetap untuk placeholder */
+  width: 11rem;
+  height: 11rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0; /* Latar belakang abu-abu muda */
-  border-radius: 50%; /* Buat placeholder menjadi bulat */
-  color: #888; /* Warna teks abu-abu */
+  background-color: #f0f0f0;
+  border-radius: 50%;
+  color: #888;
+  font-size: 0.875rem;
 }
 .Pegawai .profile-info {
-  flex: 1; /* Izinkan bagian info mengambil ruang yang tersisa */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Jarak antar elemen */
+  max-width: 25rem;
+}
+.Pegawai .Info p {
+  margin: 0.5rem 0;
 }
 .Pegawai .input-group {
-  margin-bottom: 15px; /* Jarak antara grup input */
+  margin-bottom: 1rem;
 }
 .Pegawai .input-group label {
-  display: block; /* Jadikan label elemen blok */
-  margin-bottom: 5px; /* Jarak antara label dan input */
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 .Pegawai .input-group input {
-  width: 100%; /* Lebar penuh untuk input */
-  padding: 8px; /* Padding untuk input */
-  border: 1px solid #ccc; /* Batas abu-abu muda */
-  border-radius: 4px; /* Sudut membulat */
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
 }
-.Pegawai .Info {
-  margin-left: 5rem;
+.Pegawai button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ecf0f1;
+  background-color: #2c3e50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.Pegawai button:hover {
+  background-color: #34495e;
+  transform: scale(1.05);
+}
+.Pegawai button:active {
+  transform: scale(1);
+}
+@media (max-width: 768px) {
+  .Pegawai .profile-container {
+    flex-direction: column; /* Tampilkan elemen dalam kolom */
+  }
+  .Pegawai .profile-photo,
+  .Pegawai .profile-info {
+    width: 100%; /* Ambil penuh lebar layar kecil */
+    text-align: center; /* Teks rata tengah di layar kecil */
+  }
+  .Pegawai .profile-info {
+    margin-top: 1rem;
+  }
+}
+
+.penjualan {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /* Media queries untuk layar kecil */
+}
+.penjualan h2 {
+  margin-bottom: 20px;
+}
+.penjualan .penjualan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Pastikan tombol dan ikon sejajar */
+  margin-bottom: 20px;
+}
+.penjualan .penjualan-header .add-penjualan-btn {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.penjualan .penjualan-header .add-penjualan-btn:hover {
+  background-color: #34495e;
+  transform: scale(1.05);
+}
+.penjualan .penjualan-header .add-penjualan-btn:active {
+  transform: scale(1);
+}
+.penjualan table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+.penjualan table thead tr {
+  background-color: #f4f4f4;
+}
+.penjualan table thead tr th {
+  padding: 12px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+}
+.penjualan table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.penjualan table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+.penjualan table tbody tr td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.penjualan table th,
+.penjualan table td {
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .penjualan .penjualan-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .penjualan .penjualan-header .add-penjualan-btn {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .penjualan table {
+    font-size: 14px;
+  }
+  .penjualan table thead {
+    display: none;
+  }
+  .penjualan table tbody tr {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .penjualan table tbody tr td {
+    display: flex;
+    padding: 8px 0;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .penjualan table tbody tr td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 50px;
+    text-align: left;
+    display: inline-block;
+  }
+}
+
+.add-penjualan-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Responsif */
+}
+.add-penjualan-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+}
+.add-penjualan-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.add-penjualan-form form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+.add-penjualan-form form label input,
+.add-penjualan-form form label select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+.add-penjualan-form form label input:focus,
+.add-penjualan-form form label select:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+.add-penjualan-form form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.add-penjualan-form form button:hover {
+  background-color: #45a049;
+}
+.add-penjualan-form form button:active {
+  background-color: #388e3c;
+}
+.add-penjualan-form form .produk-section {
+  display: flex;
+  gap: 10px;
+}
+.add-penjualan-form form .produk-section select,
+.add-penjualan-form form .produk-section input {
+  flex: 1;
+}
+.add-penjualan-form form .produk-section button {
+  flex: 0 0 auto;
+  padding: 0 15px;
+}
+.add-penjualan-form form .total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+@media (max-width: 768px) {
+  .add-penjualan-form form {
+    gap: 10px;
+  }
+  .add-penjualan-form form label {
+    font-size: 14px;
+  }
+  .add-penjualan-form form label input,
+  .add-penjualan-form form label select {
+    font-size: 14px;
+  }
+  .add-penjualan-form form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .add-penjualan-form form .produk-section {
+    flex-direction: column;
+  }
+  .add-penjualan-form form .produk-section select,
+  .add-penjualan-form form .produk-section input {
+    width: 100%;
+  }
+  .add-penjualan-form form .produk-section button {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .add-penjualan-form h2 {
+    font-size: 1.25rem;
+  }
 }
 
 *,
@@ -252,4 +657,4 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+}/*# sourceMappingURL=main.css.map */
