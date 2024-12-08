@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Layout from "../components/Layout";
-import menuData from "../data/menu.json";
+import Layout from "../../components/Layout";
+import menuData from "../../data/menu.json";
 
 function Menu() {
   const [menu, setMenu] = useState([]);

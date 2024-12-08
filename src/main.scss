@@ -1,9 +1,8 @@
 @use "./components/sidebar";
-@use "./pages/dashboard";
-@use "./pages/login";
+@use "./pages/login/login";
 @use "./components/layout";
-@use "./pages/menu";
-@use "./pages/tambah-menu";
+@use "./pages/menu/menu";
+@use "./pages/menu/tambah-menu";
 
 *,
 *::before,
@@ -14,17 +13,6 @@
 }
 
 
-body {
-    overflow: hidden auto;
-    width: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #FDF7F4;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    height: 100vh;
-  }
 
 
   
