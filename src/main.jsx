@@ -1,14 +1,15 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "./main.css";
-import Sidebar from "./components/Sidebar.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './main.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Login from './pages/Login.jsx'
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Sidebar />
-    <Dashboard title="Total Penjualan" value="Rp4,500,000" />
-    <Dashboard title="Total Orderan" value="320" />
-    <Dashboard title="Keuntungan" value="Rp1,600,000" />
-  </StrictMode>
-);
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Login/>}/>
+      </Routes>
+    </BrowserRouter>
+  </StrictMode>,
+)

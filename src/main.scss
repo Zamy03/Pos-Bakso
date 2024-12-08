@@ -1,5 +1,6 @@
 @use "./components/sidebar";
-@use "./components/dashboard";
+@use "./pages/dashboard";
+@use "./pages/login";
 
 *,
 *::before,
@@ -9,9 +10,18 @@
   box-sizing: border-box;
 }
 
+
 body {
-  overflow: hidden auto;
-  width: 100%;
-  height: auto;
-}
+    overflow: hidden auto;
+    width: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FDF7F4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+
   
