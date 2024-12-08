@@ -6,6 +6,7 @@ import Login from "./pages/login/Login.jsx";
 import Menu from "./pages/menu/Menu.jsx";
 import Penjualan from "./pages/Penjualan.jsx";
 import TambahMenu from "./pages/menu/TambahMenu.jsx";
+import Pegawai from "./pages/pegawai/Pegawai.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/menu" element={<Menu />} />
         <Route path="/penjualan" element={<Penjualan />} />
         <Route path="/tambah-menu" element={<TambahMenu />} />
+        <Route path="/pegawai" element={<Pegawai />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>

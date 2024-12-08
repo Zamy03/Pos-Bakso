@@ -1,0 +1,67 @@
+/* Profile.css */
+
+.Pegawai {
+    max-width: 50rem; /* Atur lebar maksimum untuk kontainer */
+    margin: 20px auto; /* Pusatkan kontainer */
+    align-items: center;
+    justify-content: center;
+    padding-top: 10rem;
+    
+    .profile-container {
+        display: flex; /* Gunakan flexbox untuk tata letak */
+        align-items: flex-start; /* Rata kanan item ke awal */
+    }
+    
+    .profile-photo {
+        margin-right: 20px; /* Jarak antara foto dan info */
+        // flex: 5rem; /* Lebar tetap untuk bagian foto */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Pusatkan foto */
+        height: 30rem;
+        width: 12rem;
+    }
+    
+    .profile-image {
+        width: 11rem; /* Lebar penuh untuk gambar */
+        height: 11rem; /* Pertahankan rasio aspek */
+        border-radius: 50%;
+        object-fit: cover;
+        
+    }
+    
+    .placeholder-image {
+        width: 100%; /* Lebar penuh untuk placeholder */
+        height: 11rem; /* Tinggi tetap untuk placeholder */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f0f0f0; /* Latar belakang abu-abu muda */
+        border-radius: 50%; /* Buat placeholder menjadi bulat */
+        color: #888; /* Warna teks abu-abu */
+    }
+    
+    .profile-info {
+        flex: 1; /* Izinkan bagian info mengambil ruang yang tersisa */
+    }
+    
+    .input-group {
+        margin-bottom: 15px; /* Jarak antara grup input */
+    }
+    
+    .input-group label {
+        display: block; /* Jadikan label elemen blok */
+        margin-bottom: 5px; /* Jarak antara label dan input */
+    }
+    
+    .input-group input {
+        width: 100%; /* Lebar penuh untuk input */
+        padding: 8px; /* Padding untuk input */
+        border: 1px solid #ccc; /* Batas abu-abu muda */
+        border-radius: 4px; /* Sudut membulat */
+    }
+
+    .Info {
+        margin-left: 5rem;
+    }
+}
