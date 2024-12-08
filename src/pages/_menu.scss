@@ -1,0 +1,42 @@
+.menu {
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 16px;
+      text-align: left;
+      border: 1px solid #ddd;
+  
+      thead {
+        tr {
+          background-color: #f4f4f4;
+          th {
+            padding: 12px;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 2px solid #ccc;
+          }
+        }
+      }
+  
+      tbody {
+        tr {
+          &:nth-child(even) {
+            background-color: #f9f9f9;
+          }
+          &:hover {
+            background-color: #f1f1f1;
+          }
+          td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+          }
+        }
+      }
+  
+      th, td {
+        text-align: center;
+      }
+    }
+  }
+  

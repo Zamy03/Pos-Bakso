@@ -1,12 +1,16 @@
+.layout-dashboard-sidebar {
+  width: 250px;
+  background-color: #2c3e50; // Warna gelap untuk sidebar
+  height: 100vh; // Sidebar penuh dari atas ke bawah
+  color: #ecf0f1; // Teks berwarna terang
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 
-.sidebar {
-  color: black;
-  width: 200px;
-  height: 100vh;
-  background-color: bisque;
-  
   h2 {
-    margin: auto 10px 10px 20px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff; // Warna putih untuk heading
   }
 
   ul {
@@ -14,15 +18,17 @@
     padding: 0;
 
     li {
-      margin: 10px 0 0 20px;
+      font-size: 18px;
+      margin: 10px 0;
+      padding: 10px;
       cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s ease, color 0.3s ease;
 
       &:hover {
-        text-decoration: underline;
+        background-color: #34495e; // Warna lebih terang saat hover
+        color: #ecf0f1; // Menonjolkan teks
       }
     }
   }
 }
-
-
-

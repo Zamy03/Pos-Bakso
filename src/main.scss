@@ -1,6 +1,9 @@
 @use "./components/sidebar";
 @use "./pages/dashboard";
 @use "./pages/login";
+@use "./components/layout";
+@use "./pages/menu";
+@use "./pages/tambah-menu";
 
 *,
 *::before,
@@ -17,9 +20,9 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #FDF7F4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     height: 100vh;
   }
 

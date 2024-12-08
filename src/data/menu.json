@@ -1,0 +1,26 @@
+[
+{
+    "nama": "Bakso Komplit",
+    "jenis": "Makanan",
+    "harga": 20000,
+    "stok": "30"
+},
+{
+    "nama": "Bakso Polos",
+    "jenis": "Makanan",
+    "harga": 14000,
+    "stok": "30"
+},
+{
+    "nama": "Mie Ayam Bakso",
+    "jenis": "Makanan",
+    "harga": 18000,
+    "stok": "30"
+},
+{
+    "nama": "Mie Ayam",
+    "jenis": "Makanan",
+    "harga": 13000,
+    "stok": "30"
+}
+]
