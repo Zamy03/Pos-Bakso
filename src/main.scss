@@ -1,4 +1,15 @@
 @use "./components/sidebar";
+@use "./page/login";
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FDF7F4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 
 h1{
     color:aqua;
