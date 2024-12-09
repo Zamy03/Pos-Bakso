@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import userData from "../../data/user.json"; // Import user data from JSON
+import { useAuth } from "../../components/auth";
 
 function Login() {
   // State to hold username, password, and error message
@@ -9,6 +10,7 @@ function Login() {
   const [error, setError] = useState('');
 
   const navigate = useNavigate(); // Initialize useNavigate
+  const { login } = useAuth();
 
   // Fetch user data from local storage on component mount
   useEffect(() => {
@@ -25,6 +27,7 @@ function Login() {
     const foundUser  = userData.find(user => user.username === username && user.password === password);
     if (foundUser ) {
       alert('Login successful!');
+      login();
       localStorage.setItem('loggedInUserId', foundUser .id); // Store the user ID
       navigate('/menu'); // Redirect to the dashboard
     } else {
