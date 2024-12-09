@@ -1,0 +1,48 @@
+/* Register.css */
+
+
+.registContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+.registForm {
+    background-color: white; /* White background for the form */
+    padding: 20px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 300px; /* Fixed width for the form */
+}
+
+.registHeading {
+    text-align: center; /* Center the heading */
+}
+
+.registLabel {
+    display: block; /* Make labels block elements */
+    margin-bottom: 5px; /* Space between label and input */
+}
+
+.registInput {
+    width: 100%; /* Full width inputs */
+    padding: 10px; /* Padding inside inputs */
+    margin-bottom: 15px; /* Space between inputs */
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 4px; /* Rounded corners for inputs */
+}
+
+.registButton {
+    width: 100%; /* Full width button */
+    padding: 10px; /* Padding inside button */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners for button */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.registButton:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
