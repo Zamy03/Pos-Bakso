@@ -1,0 +1,171 @@
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    
+    h2 {
+      margin-bottom: 20px;
+    }
+    
+    .menu-form {
+        display: flex; /* Use flexbox for layout */
+        flex-direction: row; /* Arrange items in a row */
+        flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+        max-width: 100%; /* Allow the form to take full width of its container */
+        margin: 20px auto; /* Center the form */
+        padding: 20px;
+        border: 1px solid #ccc; /* Add a border */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        background-color: #f9f9f9; /* Light background color */
+      }
+      
+      .menu-form input {
+        margin-right: 10px; /* Space between inputs */
+        padding: 10px; /* Padding inside inputs */
+        border: 1px solid #ccc; /* Border for inputs */
+        border-radius: 4px; /* Rounded corners for inputs */
+        font-size: 16px; /* Font size */
+        flex: 1; /* Allow inputs to grow and fill available space */
+        min-width: 120px; /* Set a minimum width for inputs */
+        max-width: 150px; /* Set a maximum width for inputs */
+      }
+      
+      .menu-form input:focus {
+        border-color: #007bff; /* Change border color on focus */
+        outline: none; /* Remove default outline */
+      }
+      
+      .menu-form button {
+        padding: 10px 15px; /* Padding inside button */
+        background-color: #007bff; /* Button background color */
+        color: white; /* Button text color */
+        border: none; /* Remove border */
+        border-radius: 4px; /* Rounded corners for button */
+        font-size: 16px; /* Font size */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s; /* Smooth transition */
+      }
+      
+      .menu-form button:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+      }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; /* Pastikan tombol dan ikon sejajar */
+      margin-bottom: 20px;
+  
+      .add-menu-btn {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+  
+        &:hover {
+          background-color: #34495e;
+          transform: scale(1.05);
+        }
+  
+        &:active {
+          transform: scale(1);
+        }
+      }
+    }
+  
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 16px;
+      text-align: left;
+      border: 1px solid #ddd;
+        
+      thead {
+        tr {
+          background-color: #f4f4f4;
+  
+          th {
+            padding: 12px;
+            font-weight: bold;
+            color: #333;
+            border-bottom: 2px solid #ccc;
+          }
+        }
+      }
+  
+      tbody {
+        tr {
+          &:nth-child(even) {
+            background-color: #f9f9f9;
+          }
+          &:hover {
+            background-color: #f1f1f1;
+          }
+  
+          td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+          }
+        }
+      }
+  
+      th,
+      td {
+        text-align: center;
+      }
+    }
+  
+    /* Media queries untuk layar kecil */
+    @media (max-width: 768px) {
+      .menu-header {
+        flex-direction: column;
+        align-items: stretch;
+  
+        .add-menu-btn {
+          margin-top: 10px;
+          width: 100%;
+        }
+      }
+  
+      table {
+        font-size: 14px;
+  
+        thead {
+          display: none;
+        }
+  
+        tbody {
+          tr {
+            display: block;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+          }
+  
+          td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+          }
+  
+          td::before {
+            content: attr(data-label);
+            font-weight: bold;
+            width: 50%;
+            text-align: left;
+            display: inline-block;
+          }
+        }
+      }
+    }
+  }
+  
