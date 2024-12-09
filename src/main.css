@@ -26,7 +26,6 @@ h2 {
   margin-bottom: 20px;
   margin-top: 5px;
   margin-left: 3rem;
-  color: #ffffff;
 }
 
 ul {
@@ -256,7 +255,7 @@ ul li:hover {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #fdf7f4;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   /* Responsif */
@@ -303,7 +302,7 @@ ul li:hover {
   transition: background-color 0.3s ease;
 }
 .add-product-form form button:hover {
-  background-color: #45a049;
+  background-color: #997c70;
 }
 .add-product-form form button:active {
   background-color: #388e3c;
@@ -657,4 +656,4 @@ ul li:hover {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}/*# sourceMappingURL=main.css.map */
+}

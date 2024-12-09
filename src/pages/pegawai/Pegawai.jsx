@@ -1,18 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../components/Layout';
+import userData from '../../data/user.json'; // Import user data
 
 function Pegawai() {
-  // Sample user data
-  const [user, setUser ] = useState({
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    phone: '123-456-7890',
-    photo: null, // Add a photo property
+  // State to hold user data
+  const [user, setUser ] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedUser , setEditedUser ] = useState({
+    username: '',
+    email: '',
+    nohp: '',
+    photo: null,
   });
 
-  // State to manage edit mode
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedUser , setEditedUser ] = useState(user);
+  useEffect(() => {
+    // Retrieve the user ID from local storage
+    const loggedInUserId = localStorage.getItem('loggedInUserId');
+    
+    // Find the user data based on the ID
+    if (loggedInUserId) {
+      const foundUser  = userData.find(user => user.id === parseInt(loggedInUserId, 10));
+      if (foundUser ) {
+        setUser (foundUser );
+        setEditedUser (foundUser ); // Initialize editedUser  with foundUser  data
+      }
+    }
+  }, []);
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -24,8 +37,8 @@ function Pegawai() {
   };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditedUser ({ ...editedUser , [name]: value });
+    const { username, value } = e.target;
+    setEditedUser ({ ...editedUser , [username]: value });
   };
 
   const handlePhotoChange = (e) => {
@@ -39,9 +52,13 @@ function Pegawai() {
     }
   };
 
+  if (!user) {
+    return <div>Loading...</div>; // Handle loading state
+  }
+
   return (
     <Layout>
-    <h2>Pegawai</h2>
+      <h2>Pegawai</h2>
       <div className="Pegawai">
         <div className="profile-container">
           <div className="profile-photo">
@@ -56,7 +73,7 @@ function Pegawai() {
                 <input
                   type="file"
                   id="photo"
-                  name="photo"
+                  username="photo"
                   accept="image/*"
                   onChange={handlePhotoChange}
                 />
@@ -67,12 +84,12 @@ function Pegawai() {
             {isEditing ? (
               <div>
                 <div className="input-group">
-                  <label htmlFor="name">Name</label>
+                  <label htmlFor="username">Name</label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={editedUser .name}
+                    id="username"
+                    username="username"
+                    value={editedUser .username}
                     onChange={handleChange}
                   />
                 </div>
@@ -81,18 +98,18 @@ function Pegawai() {
                   <input
                     type="email"
                     id="email"
-                    name="email"
+                    username="email"
                     value={editedUser .email}
                     onChange={handleChange}
                   />
                 </div>
                 <div className="input-group">
-                  <label htmlFor="phone">Phone</label>
+                  <label htmlFor="nohp">Phone</label>
                   <input
                     type="text"
-                    id="phone"
-                    name="phone"
-                    value={editedUser .phone}
+                    id="nohp"
+                    username="nohp"
+                    value={editedUser .nohp}
                     onChange={handleChange}
                   />
                 </div>
@@ -100,9 +117,9 @@ function Pegawai() {
               </div>
             ) : (
               <div className='Info'>
-                <p><strong>Name:</strong> {user.name}</p>
+                <p><strong>Name:</strong> {user.username}</p>
                 <p><strong>Email:</strong> {user.email}</p>
-                <p><strong>Phone:</strong> {user.phone}</p>
+                <p><strong>Phone:</strong> {user.nohp}</p>
                 <button onClick={handleEdit} className="edit-btn">Edit</button>
               </div>
             )}

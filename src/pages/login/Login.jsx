@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import userData from "../../data/user.json"; // Import user data from JSON
 
 function Login() {
   // State to hold username, password, and error message
@@ -7,23 +8,27 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  // Hardcoded user data for demonstration
-  const userData = {
-    username: 'user@example.com',
-    password: 'password123',
-  };
-
   const navigate = useNavigate(); // Initialize useNavigate
+
+  // Fetch user data from local storage on component mount
+  useEffect(() => {
+    const localStorageData = JSON.parse(localStorage.getItem("user")) || [];
+    // If you want to merge local storage data with userData, you can do it here
+    // For example, if localStorageData is an array of users:
+    // userData = [...userData, ...localStorageData];
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
 
     // Validate the credentials
-    if (username === userData.username && password === userData.password) {
+    const foundUser  = userData.find(user => user.username === username && user.password === password);
+    if (foundUser ) {
       alert('Login successful!');
+      localStorage.setItem('loggedInUserId', foundUser .id); // Store the user ID
       navigate('/menu'); // Redirect to the dashboard
     } else {
-      alert('Invalid username or password');
+      alert('Invalid username or password'); // Set error message
     }
   };
 
