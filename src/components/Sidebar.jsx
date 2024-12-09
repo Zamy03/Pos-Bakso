@@ -38,6 +38,7 @@ function Sidebar() {
         <h2>Dashboard</h2>
         <ul>
           <li onClick={() => handleNavigation('/penjualan')}>Penjualan</li>
+          <li onClick={() => handleNavigation('/pelanggan')}>Pelanggan</li>
           <li onClick={() => handleNavigation('/menu')}>Produk</li>
           <li onClick={() => handleNavigation('/pegawai')}>Pegawai</li>
           <li onClick={() => handleNavigation('/')}>Logout</li>
