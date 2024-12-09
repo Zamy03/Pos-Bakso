@@ -12,6 +12,9 @@ import TambahMenu from "./pages/menu/TambahMenu.jsx";
 import Pegawai from "./pages/pegawai/Pegawai.jsx";
 import { AuthProvider } from "./components/auth.jsx";
 import ProtectedRoute from "./components/proute.jsx";
+import EditMenu from "./pages/menu/EditMenu.jsx";
+import Register from "./pages/register/Regist.jsx";
+import Listpeg from "./pages/listpeg/listpeg.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -19,6 +22,7 @@ createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/regist" element={<Register />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/menu" element={<Menu />} />
           <Route path="/pelanggan" element={<Pelanggan />} />
@@ -26,6 +30,8 @@ createRoot(document.getElementById("root")).render(
           <Route path="/penjualan" element={<Penjualan />} />
           <Route path="/tambah-penjualan" element={<TambahPenjualan />} />
           <Route path="/tambah-menu" element={<TambahMenu />} />
+          <Route path="/pegawai" element={<Listpeg />} />
+          <Route path="/edit-menu" element={<EditMenu />} />
           <Route path="/pegawai" element={<Pegawai />} />
         </Route>
       </Routes>

@@ -89,7 +89,7 @@ function Pegawai() {
                     type="text"
                     id="username"
                     username="username"
-                    value={editedUser .username}
+                    value={editedUser.username}
                     onChange={handleChange}
                   />
                 </div>
@@ -99,7 +99,7 @@ function Pegawai() {
                     type="email"
                     id="email"
                     username="email"
-                    value={editedUser .email}
+                    value={editedUser.email}
                     onChange={handleChange}
                   />
                 </div>
@@ -109,7 +109,7 @@ function Pegawai() {
                     type="text"
                     id="nohp"
                     username="nohp"
-                    value={editedUser .nohp}
+                    value={editedUser.nohp}
                     onChange={handleChange}
                   />
                 </div>
