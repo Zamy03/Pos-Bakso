@@ -10,6 +10,7 @@ import TambahMenu from "./pages/menu/TambahMenu.jsx";
 import Pegawai from "./pages/pegawai/Pegawai.jsx";
 import { AuthProvider } from "./components/auth.jsx";
 import ProtectedRoute from "./components/proute.jsx";
+import EditMenu from "./pages/menu/EditMenu.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/penjualan" element={<Penjualan />} />
           <Route path="/tambah-penjualan" element={<TambahPenjualan />} />
           <Route path="/tambah-menu" element={<TambahMenu />} />
+          <Route path="/edit-menu" element={<EditMenu />} />
           <Route path="/pegawai" element={<Pegawai />} />
         </Route>
       </Routes>

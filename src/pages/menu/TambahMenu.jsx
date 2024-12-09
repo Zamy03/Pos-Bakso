@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-function TambahMenu({ onAddProduct }) {
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    category: "",
-    price: "",
-    stock: "",
-  });
+function TambahMenu({ onAddProduct, onEditProduct, editData }) {
+  const [newProduct, setNewProduct] = useState(
+    editData || {
+      name: "",
+      category: "",
+      price: "",
+      stock: "",
+    }
+  );
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,10 +21,23 @@ function TambahMenu({ onAddProduct }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const existingProducts = JSON.parse(localStorage.getItem("products")) || [];
-    const updatedProducts = [...existingProducts, newProduct];
-    localStorage.setItem("products", JSON.stringify(updatedProducts));
-    alert("Produk berhasil ditambahkan!");
-    onAddProduct(newProduct); // Memanggil fungsi untuk update tabel di komponen Menu
+
+    if (editData) {
+      // Mode Edit
+      const updatedProducts = existingProducts.map((product) =>
+        product.name === editData.name ? newProduct : product
+      );
+      localStorage.setItem("products", JSON.stringify(updatedProducts));
+      if (onEditProduct) onEditProduct(newProduct);
+      alert("Produk berhasil diperbarui!");
+    } else {
+      // Mode Tambah
+      const updatedProducts = [...existingProducts, newProduct];
+      localStorage.setItem("products", JSON.stringify(updatedProducts));
+      if (onAddProduct) onAddProduct(newProduct);
+      alert("Produk berhasil ditambahkan!");
+    }
+
     setNewProduct({
       name: "",
       category: "",
@@ -33,7 +48,7 @@ function TambahMenu({ onAddProduct }) {
 
   return (
     <div className="add-product-form">
-      <h2>Tambah Produk</h2>
+      <h2>{editData ? "Edit Produk" : "Tambah Produk"}</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Nama Produk:
@@ -75,10 +90,11 @@ function TambahMenu({ onAddProduct }) {
             required
           />
         </label>
-        <button type="submit">Simpan Produk</button>
+        <button type="submit">{editData ? "Perbarui" : "Simpan Produk"}</button>
       </form>
     </div>
   );
 }
+
 
 export default TambahMenu;
