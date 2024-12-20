@@ -1,37 +1,36 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import userData from "../../data/user.json"; // Import user data from JSON
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios"; // Import axios for HTTP requests
 import { useAuth } from "../../components/auth";
 
 function Login() {
-  // State to hold username, password, and error message
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState(""); // State for email
+  const [password, setPassword] = useState(""); // State for password
+  const [error, setError] = useState(""); // State for error message
 
-  const navigate = useNavigate(); // Initialize useNavigate
-  const { login } = useAuth();
+  const navigate = useNavigate();
+  const { setLogin } = useAuth();
 
-  // Fetch user data from local storage on component mount
-  useEffect(() => {
-    const localStorageData = JSON.parse(localStorage.getItem("user")) || [];
-    // If you want to merge local storage data with userData, you can do it here
-    // For example, if localStorageData is an array of users:
-    // userData = [...userData, ...localStorageData];
-  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent default form submission
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission
+    try {
+      const response = await axios.post("http://localhost:3000/auth/login", {
+        email,
+        password,
+      });
 
-    // Validate the credentials
-    const foundUser  = userData.find(user => user.username === username && user.password === password);
-    if (foundUser ) {
-      alert('Login successful!');
-      login();
-      localStorage.setItem('loggedInUserId', foundUser .id); // Store the user ID
-      navigate('/menu'); // Redirect to the dashboard
-    } else {
-      alert('Invalid username or password'); // Set error message
+      const { token } = response.data; // Extract JWT token from the response
+
+      // Save the token in localStorage
+      localStorage.setItem("auth_token", token); // Store the token in localStorage
+
+      alert("Login successful!");
+      setLogin(); // Update authentication state
+      navigate("/menu"); // Redirect to the menu/dashboard
+    } catch (error) {
+      console.error("Login error: ", error);
+      setError("Invalid email or password"); // Set error message
     }
   };
 
@@ -43,13 +42,13 @@ function Login() {
           {error && <p className="error-message">{error}</p>} {/* Display error message */}
           <form onSubmit={handleSubmit}> {/* Add onSubmit handler */}
             <div className="input-group">
-              <label htmlFor="username">Username/Email</label>
+              <label htmlFor="email">Email</label>
               <input
-                type="text"
-                id="username"
-                name="username"
-                value={username} // Bind value to state
-                onChange={(e) => setUsername(e.target.value)} // Update state on change
+                type="email"
+                id="email"
+                name="email"
+                value={email} // Bind value to state
+                onChange={(e) => setEmail(e.target.value)} // Update state on change
                 required
               />
             </div>
@@ -68,6 +67,12 @@ function Login() {
               Submit
             </button>
           </form>
+          <p className="redirect-message">
+            Belum punya akun?{" "}
+            <Link to="/regist" className="register-link">
+              Daftar di sini
+            </Link>
+          </p>
         </div>
       </div>
     </div>

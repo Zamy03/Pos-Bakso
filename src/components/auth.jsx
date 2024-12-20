@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     return localStorage.getItem('token') !== null;
   });
 
-  const login = (token) => {
+  const setLogin = (token) => {
     setIsAuthenticated(true);
     // Store the token in localStorage
     localStorage.setItem('token', token);
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, setLogin, logout }}>
       {children}
     </AuthContext.Provider>
   );
