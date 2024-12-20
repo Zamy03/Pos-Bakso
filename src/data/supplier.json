@@ -1,0 +1,38 @@
+[
+    {
+        "id_supplier": "A01",
+        "nama_supp": "Asep Daging",
+        "jenis_supp": "Daging Sapi",
+        "alamat": "Sariasih Blok 8 No.19, Bandung",
+        "no_telp": "081000000000"
+    },
+    {
+        "id_supplier": "B01",
+        "nama_supp": "Salim Sembako",
+        "jenis_supp": "Tepung Terigu",
+        "alamat": "Sukajadi No.19, Bandung",
+        "no_telp": "081000000012"
+    },
+    {
+        "id_supplier": "C01",
+        "nama_supp": "Salim Sembako",
+        "jenis_supp": "Tepung Kanji",
+        "alamat": "Sukajadi No.19, Bandung",
+        "no_telp": "081000000021"
+    },
+    {
+        "id_supplier": "D01",
+        "nama_supp": "Salim Sembako",
+        "jenis_supp": "Bihun",
+        "alamat": "Sukajadi No.19, Bandung",
+        "no_telp": "081000000021"
+    },
+    {
+        "id_supplier": "E01",
+        "nama_supp": "Deddy Farm",
+        "jenis_supp": "Sayur",
+        "alamat": "Gegerkalong 21, Bandung",
+        "no_telp": "081000000051"
+    }
+    
+    ]

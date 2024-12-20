@@ -15,6 +15,8 @@ import ProtectedRoute from "./components/proute.jsx";
 import EditMenu from "./pages/menu/EditMenu.jsx";
 import Register from "./pages/register/Regist.jsx";
 import Listpeg from "./pages/listpeg/listpeg.jsx";
+import Supplier from "./pages/supplier/Supplier.jsx";
+import TambahSupplier from "./pages/supplier/TambahSupplier.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -33,6 +35,8 @@ createRoot(document.getElementById("root")).render(
           <Route path="/pegawai" element={<Listpeg />} />
           <Route path="/edit-menu" element={<EditMenu />} />
           <Route path="/pegawai" element={<Pegawai />} />
+          <Route path="/supplier" element={<Supplier />} />
+          <Route path="/tambah-supplier" element={<TambahSupplier />} />
         </Route>
       </Routes>
     </BrowserRouter>
