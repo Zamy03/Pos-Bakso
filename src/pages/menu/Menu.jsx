@@ -7,9 +7,21 @@ function Menu() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const localStorageData = JSON.parse(localStorage.getItem("products")) || [];
-    // Pastikan hanya menggunakan data dari localStorage
-    setMenu(localStorageData);
+    // Fetch data from server API
+    async function fetchMenu() {
+      try {
+        const response = await fetch("http://localhost:3000/api/menus");
+        if (!response.ok) {
+          throw new Error("Failed to fetch menu data");
+        }
+        const data = await response.json();
+        setMenu(data); // Save the data to state
+      } catch (error) {
+        console.error("Error fetching menu data:", error);
+      }
+    }
+
+    fetchMenu();
   }, []);
 
   let no = 1;
@@ -31,43 +43,41 @@ function Menu() {
             <tr>
               <th>No</th>
               <th>Nama Menu</th>
-              <th>Jenis</th>
+              <th>Kategori</th>
               <th>Harga</th>
               <th>Stok</th>
               <th>Aksi</th>
             </tr>
           </thead>
           <tbody>
-            {menu.map((data, index) => {
-              // Pastikan data tidak null atau undefined
-              if (!data) {
+            {menu.length > 0 ? (
+              menu.map((data, index) => {
+                const nama = data.nama_menu || "Tidak Diketahui";
+                const kategori = data.kategori?.nama_kategori || "Tidak Diketahui"; // Extract category name
+                const harga = data.harga || "0";
+                const stok = data.tersedia ? "Tersedia" : "Tidak Tersedia"; // Assuming 'tersedia' indicates stock status
+
                 return (
-                  <tr key={index}>
-                    <td colSpan="6">Data tidak tersedia</td>
+                  <tr key={data.id_menu || index}>
+                    <td data-label="No">{no++}</td>
+                    <td data-label="Nama Menu">{nama}</td>
+                    <td data-label="Kategori">{kategori}</td> {/* Display category name */}
+                    <td data-label="Harga">{harga}</td>
+                    <td data-label="Stok">{stok}</td> {/* Display stock availability */}
+                    <td data-label="Aksi">
+                      <button onClick={() => handleEdit(index)}>Edit</button>
+                      <button onClick={() => handleDelete(data.id_menu)}>
+                        Hapus
+                      </button>
+                    </td>
                   </tr>
                 );
-              }
-
-              // Pastikan data memiliki properti yang diharapkan
-              const nama = data.nama || data.name || "Tidak Diketahui";
-              const jenis = data.jenis || data.category || "Tidak Diketahui";
-              const harga = data.harga || data.price || "0";
-              const stok = data.stok || data.stock || "0";
-
-              return (
-                <tr key={index}>
-                  <td data-label="No">{no++}</td>
-                  <td data-label="Nama Menu">{nama}</td>
-                  <td data-label="Jenis">{jenis}</td>
-                  <td data-label="Harga">{harga}</td>
-                  <td data-label="Stok">{stok}</td>
-                  <td data-label="Aksi">
-                    <button onClick={() => handleEdit(index)}>Edit</button>
-                    <button onClick={() => handleDelete(index)}>Hapus</button>
-                  </td>
-                </tr>
-              );
-            })}
+              })
+            ) : (
+              <tr>
+                <td colSpan="6">Data menu tidak tersedia</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
@@ -79,11 +89,20 @@ function Menu() {
     navigate("/edit-menu", { state: { product: selectedProduct, index } });
   }
 
-  function handleDelete(index) {
-    const updatedMenu = [...menu];
-    updatedMenu.splice(index, 1);
-    setMenu(updatedMenu);
-    localStorage.setItem("products", JSON.stringify(updatedMenu));
+  async function handleDelete(id) {
+    try {
+      const response = await fetch(`http://localhost:3000/api/menus/${id}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Failed to delete menu");
+      }
+      // Update state after deletion
+      const updatedMenu = menu.filter((item) => item.id_menu !== id);
+      setMenu(updatedMenu);
+    } catch (error) {
+      console.error("Error deleting menu:", error);
+    }
   }
 }
 
