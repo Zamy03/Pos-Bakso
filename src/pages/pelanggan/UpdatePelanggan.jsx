@@ -7,7 +7,7 @@ function TambahPelanggan() {
         alamat: "",
         telepon: "",
     });
-    const [editingIndex, setEditingIndex] = useState(null); // Indeks pelanggan yang sedang diedit
+    const [editingIndex, setEditingIndex] = useState(null); // ID pelanggan yang sedang diedit
     const navigate = useNavigate(); // Hook untuk navigasi
     const location = useLocation(); // Untuk membaca data navigasi
 
@@ -15,51 +15,84 @@ function TambahPelanggan() {
     useEffect(() => {
         if (location.state) {
             const { data, index } = location.state;
-            console.log("Editing Data:", data);
-            console.log("Editing Index:", index);
-    
+
             // Pastikan data valid sebelum mengatur state
             if (data && index !== undefined) {
-                setEditingIndex(index);
+                setEditingIndex(index); // Simpan ID pelanggan yang diedit
+                setNewPelanggan(data); // Isi form dengan data pelanggan
             }
         }
     }, [location.state]);
-    
-    const handleSubmit = (e) => {
+
+    // Fungsi untuk menangani perubahan pada input
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setNewPelanggan({
+            ...newPelanggan,
+            [name]: value,
+        });
+    };
+
+    // Fungsi untuk menangani submit form
+    const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         // Validasi input
         if (!newPelanggan.nama || !newPelanggan.alamat || !newPelanggan.telepon) {
             alert("Semua kolom harus diisi!");
             return;
         }
-    
-        // Ambil data pelanggan yang sudah ada
-        const existingPelanggan = JSON.parse(localStorage.getItem("pelanggan")) || [];
-    
-        if (editingIndex !== null) {
-            // Update data pelanggan di indeks yang sesuai
-            existingPelanggan[editingIndex] = newPelanggan;
-            alert("Pelanggan berhasil diperbarui!");
-        } else {
-            // Tambahkan pelanggan baru
-            existingPelanggan.push(newPelanggan);
-            alert("Pelanggan berhasil ditambahkan!");
+
+        try {
+            // Jika sedang mengedit pelanggan
+            if (editingIndex !== null) {
+                const response = await fetch(`http://localhost:3000/pelanggan/update/${editingIndex}`, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("auth_token")}`, // Tambahkan token jika diperlukan
+                    },
+                    body: JSON.stringify(newPelanggan),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || "Failed to update pelanggan");
+                }
+
+                alert("Pelanggan berhasil diperbarui!");
+            } else {
+                // Jika menambah pelanggan baru
+                const response = await fetch("http://localhost:3000/pelanggan", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("auth_token")}`, // Tambahkan token jika diperlukan
+                    },
+                    body: JSON.stringify(newPelanggan),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.message || "Failed to add pelanggan");
+                }
+
+                alert("Pelanggan berhasil ditambahkan!");
+            }
+
+            // Reset form dan navigasi kembali
+            setNewPelanggan({
+                nama: "",
+                alamat: "",
+                telepon: "",
+            });
+            navigate("/pelanggan");
+        } catch (error) {
+            console.error("Error:", error.message);
+            alert(`Error: ${error.message}`);
         }
-    
-        // Simpan perubahan ke localStorage
-        localStorage.setItem("pelanggan", JSON.stringify(existingPelanggan));
-    
-        // Reset form dan navigasi kembali
-        setNewPelanggan({
-            nama: "",
-            alamat: "",
-            telepon: "",
-        });
-        navigate("/pelanggan");
     };
-    
-    
+
     return (
         <div className="add-pelanggan-form">
             <h2>{editingIndex !== null ? "Edit Pelanggan" : "Tambah Pelanggan"}</h2>

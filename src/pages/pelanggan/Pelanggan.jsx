@@ -7,12 +7,22 @@ function Pelanggan() {
     const [pelanggan, setPelanggan] = useState([]);
     const navigate = useNavigate();
 
+    // Fetch data pelanggan dari API
     useEffect(() => {
-        const localStorageData = JSON.parse(localStorage.getItem("pelanggan")) || [];
-        const validData = localStorageData.filter(
-            (item) => item && item.nama && item.alamat && item.telepon
-        ); // Hanya ambil data yang valid
-        setPelanggan([...pelangganData, ...validData]);
+        const fetchPelanggan = async () => {
+            try {
+                const response = await fetch("http://localhost:3000/pelanggan/all");
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+                const data = await response.json();
+                setPelanggan(data);
+            } catch (error) {
+                console.error("Error fetching pelanggan:", error);
+            }
+        };
+
+        fetchPelanggan();
     }, []);
     
 
@@ -24,12 +34,38 @@ function Pelanggan() {
         localStorage.setItem("pelanggan", JSON.stringify(updatedPelanggan));
     };
 
-    // Fungsi untuk navigasi ke halaman edit pelanggan
-    const handleEdit = (index) => {
-        navigate("/tambah-pelanggan", {
-            state: { data: pelanggan[index], index },
+// Fungsi untuk navigasi ke halaman edit pelanggan
+const handleEdit = async (id) => {
+    try {
+        const token = localStorage.getItem("auth_token");
+        if (!token) {
+            throw new Error("Token not found. Please log in first.");
+        }
+
+        const response = await fetch(`http://localhost:3000/pelanggan/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`, // Tambahkan token untuk autentikasi
+            },
         });
-    };    
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Failed to fetch pelanggan data");
+        }
+
+        const pelangganData = await response.json();
+
+        // Navigasi ke halaman tambah pelanggan dengan data yang didapatkan
+        navigate("/tambah-pelanggan", {
+            state: { data: pelangganData, index: id },
+        });
+    } catch (error) {
+        console.error("Error:", error);
+        alert(`Error: ${error.message}`);
+    }
+};
     
 
     return (
@@ -55,21 +91,17 @@ function Pelanggan() {
                         </tr>
                     </thead>
                     <tbody>
-    {pelanggan.map((data, index) => {
-        if (!data || !data.nama || !data.alamat || !data.telepon) {
-            // Skip data yang tidak valid
-            return null;
-        }
-
+        {pelanggan.map((data, index) => {
+        
         return (
             <tr key={index}>
                 <td data-label="No">{index + 1}</td>
                 <td data-label="Nama Pelanggan">{data.nama}</td>
                 <td data-label="Alamat">{data.alamat}</td>
-                <td data-label="No. Telepon">{data.telepon}</td>
+                <td data-label="No. Telepon">{data.no_hp}</td>
                 <td data-label="Aksi">
                     <button onClick={() => handleDelete(index)}>Hapus</button>
-                    <button onClick={() => handleEdit(index)}>Update</button>
+                    <button onClick={() => handleEdit(data.id)}>Update</button>
                 </td>
             </tr>
         );

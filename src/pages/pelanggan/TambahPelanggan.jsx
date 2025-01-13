@@ -5,7 +5,7 @@ function TambahPelanggan() {
     const [newPelanggan, setNewPelanggan] = useState({
         nama: "",
         alamat: "",
-        telepon: "",
+        no_hp: "", // Mengganti "telepon" menjadi "no_hp" sesuai dengan struktur di backend
     });
     const [editingIndex, setEditingIndex] = useState(null); // Indeks pelanggan yang sedang diedit
     const navigate = useNavigate(); // Hook untuk navigasi
@@ -28,32 +28,49 @@ function TambahPelanggan() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const existingPelanggan = JSON.parse(localStorage.getItem("pelanggan")) || [];
 
-        if (editingIndex !== null) {
-            // Update pelanggan yang sudah ada
-            existingPelanggan[editingIndex] = newPelanggan;
-            alert("Pelanggan berhasil diperbarui!");
-        } else {
-            // Tambahkan pelanggan baru
-            existingPelanggan.push(newPelanggan);
-            alert("Pelanggan berhasil ditambahkan!");
+        try {
+            // Ambil token dari localStorage
+            const token = localStorage.getItem("auth_token");
+            if (!token) {
+                throw new Error("Token not found. Please log in first.");
+            }
+
+            const response = await fetch("http://localhost:3000/pelanggan/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`, // Tambahkan token ke header Authorization
+                },
+                body: JSON.stringify(newPelanggan),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Failed to add pelanggan");
+            }
+
+            if (editingIndex !== null) {
+                alert("Pelanggan berhasil diperbarui!");
+            } else {
+                alert("Pelanggan berhasil ditambahkan!");
+            }
+
+            // Reset form
+            setNewPelanggan({
+                nama: "",
+                alamat: "",
+                no_hp: "",
+            });
+
+            // Navigasi kembali ke halaman daftar pelanggan
+            navigate("/pelanggan");
+        } catch (error) {
+            console.error("Error:", error);
+            alert(`Error: ${error.message}`);
         }
-
-        // Simpan ke localStorage
-        localStorage.setItem("pelanggan", JSON.stringify(existingPelanggan));
-
-        // Reset form
-        setNewPelanggan({
-            nama: "",
-            alamat: "",
-            telepon: "",
-        });
-
-        // Navigasi kembali ke halaman daftar pelanggan
-        navigate("/pelanggan");
     };
 
     return (
@@ -84,8 +101,8 @@ function TambahPelanggan() {
                     No. Telepon:
                     <input
                         type="text"
-                        name="telepon"
-                        value={newPelanggan.telepon}
+                        name="no_hp"
+                        value={newPelanggan.no_hp}
                         onChange={handleChange}
                         required
                     />
