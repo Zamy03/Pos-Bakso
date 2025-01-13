@@ -1,40 +1,56 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-function TambahMenu({ onAddProduct, onEditProduct, editData }) {
+function TambahMenu() {
+  const navigate = useNavigate();
+
   const [newProduct, setNewProduct] = useState({
-    name: "",
-    categoryId: 1, // default ke Makanan (ID 1)
-    price: "",
-    stock: true, // default stok tersedia
+    nama_menu: "",
+    id_kategori: "",
+    harga: "",
+    tersedia: true,
   });
 
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Jika ada data edit, set ke form
   useEffect(() => {
-    if (editData) {
-      setNewProduct({
-        name: editData.nama_menu || "",
-        categoryId: editData.id_kategori || 1, // ID kategori untuk produk yang diedit
-        price: editData.harga || "",
-        stock: editData.stok || true, // stok tersedia atau tidak
-      });
-    }
-    // Ambil data kategori dari API atau sumber lain
     const fetchCategories = async () => {
       try {
         const response = await fetch("http://localhost:3000/api/categories");
         const data = await response.json();
-        setCategories(data);
+
+        // Tambahkan kategori default jika tidak ada di data API
+        const defaultCategories = [
+          { id: 1, nama_kategori: "Makanan" },
+          { id: 2, nama_kategori: "Minuman" },
+        ];
+
+        const mergedCategories = defaultCategories.concat(
+          data.filter(
+            (apiCategory) =>
+              !defaultCategories.some(
+                (defaultCategory) => defaultCategory.id === apiCategory.id
+              )
+          )
+        );
+
+        setCategories(mergedCategories);
       } catch (error) {
         console.error("Error fetching categories:", error);
+
+        // Fallback ke kategori default jika API gagal
+        setCategories([
+          { id: 1, nama_kategori: "Makanan" },
+          { id: 2, nama_kategori: "Minuman" },
+        ]);
       } finally {
         setLoading(false);
       }
     };
+
     fetchCategories();
-  }, [editData]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -48,56 +64,24 @@ function TambahMenu({ onAddProduct, onEditProduct, editData }) {
     e.preventDefault();
 
     try {
-      const response = editData
-        ? await fetch(`http://localhost:3000/api/menus/${editData.id_menu}`, {
-            method: "PUT", // Untuk memperbarui menu
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              nama_menu: newProduct.name,
-              id_kategori: newProduct.categoryId,
-              harga: newProduct.price,
-              stok: newProduct.stock,
-            }),
-          })
-        : await fetch("http://localhost:3000/api/menus", {
-            method: "POST", // Untuk menambah menu baru
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              nama_menu: newProduct.name,
-              id_kategori: newProduct.categoryId,
-              harga: newProduct.price,
-              stok: newProduct.stock,
-            }),
-          });
-
-      if (!response.ok) {
-        throw new Error("Gagal menambah/ memperbarui menu");
-      }
-
-      const result = await response.json(); // Menyimpan hasil menu yang ditambahkan/ diperbarui
-
-      if (editData) {
-        if (onEditProduct) onEditProduct(result); // Update data di parent
-        alert("Produk berhasil diperbarui!");
-      } else {
-        if (onAddProduct) onAddProduct(result); // Menambahkan produk baru ke parent
-        alert("Produk berhasil ditambahkan!");
-      }
-
-      setNewProduct({
-        name: "",
-        categoryId: 1,
-        price: "",
-        stock: true,
+      const response = await fetch("http://localhost:3000/api/menus", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newProduct),
       });
 
+      if (!response.ok) {
+        throw new Error("Gagal menambahkan menu");
+      }
+
+      const createdMenu = await response.json();
+      alert("Menu berhasil ditambahkan!");
+      navigate("/menu", { state: { createdMenu } });
     } catch (error) {
-      console.error("Error:", error);
-      alert("Terjadi kesalahan saat menyimpan data menu.");
+      console.error("Error adding menu:", error);
+      alert("Terjadi kesalahan saat menambahkan menu");
     }
   };
 
@@ -107,61 +91,59 @@ function TambahMenu({ onAddProduct, onEditProduct, editData }) {
 
   return (
     <div className="add-product-form">
-      <h2>{editData ? "Edit Produk" : "Tambah Produk"}</h2>
+      <h2>Tambah Produk</h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="name">Nama Menu:</label>
+        <label>
+          Nama Menu:
           <input
             type="text"
-            name="name"
-            id="name"
-            value={newProduct.name}
+            name="nama_menu"
+            value={newProduct.nama_menu}
             onChange={handleChange}
             required
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="category">Kategori:</label>
+        </label>
+        <label>
+          Kategori:
           <select
-            name="categoryId"
-            id="category"
-            value={newProduct.categoryId}
+            name="id_kategori"
+            value={newProduct.id_kategori}
             onChange={handleChange}
             required
           >
+            <option value="" disabled>
+              Pilih Kategori
+            </option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.nama_kategori}
               </option>
             ))}
           </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="price">Harga:</label>
+        </label>
+        <label>
+          Harga:
           <input
             type="number"
-            name="price"
-            id="price"
-            value={newProduct.price}
+            name="harga"
+            value={newProduct.harga}
             onChange={handleChange}
             required
           />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="stock">Stok Tersedia:</label>
+        </label>
+        <label>
+          Stok:
           <input
             type="checkbox"
-            name="stock"
-            id="stock"
-            checked={newProduct.stock}
-            onChange={handleChange}
+            name="tersedia"
+            checked={newProduct.tersedia}
+            onChange={(e) =>
+              setNewProduct({ ...newProduct, tersedia: e.target.checked })
+            }
           />
-        </div>
-
-        <button type="submit">{editData ? "Perbarui" : "Simpan Produk"}</button>
+          Tersedia
+        </label>
+        <button type="submit">Simpan Produk</button>
       </form>
     </div>
   );
