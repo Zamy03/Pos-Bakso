@@ -1,133 +1,102 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../../components/Layout';
-import userData from '../../data/user.json'; // Import user data
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Layout from "../../components/Layout";
 
 function Pegawai() {
-  // State to hold user data
-  const [user, setUser ] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedUser , setEditedUser ] = useState({
-    username: '',
-    email: '',
-    nohp: '',
-    photo: null,
-  });
+  const [users, setUsers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Retrieve the user ID from local storage
-    const loggedInUserId = localStorage.getItem('loggedInUserId');
-    
-    // Find the user data based on the ID
-    if (loggedInUserId) {
-      const foundUser  = userData.find(user => user.id === parseInt(loggedInUserId, 10));
-      if (foundUser ) {
-        setUser (foundUser );
-        setEditedUser (foundUser ); // Initialize editedUser  with foundUser  data
+    // Fetch all users
+    async function fetchUsers() {
+      try {
+        const response = await fetch("http://localhost:3000/pgw/pg");
+        if (!response.ok) {
+          throw new Error("Failed to fetch users");
+        }
+        const data = await response.json();
+        setUsers(data.data); // Access `data` array from response
+      } catch (error) {
+        console.error("Error fetching users:", error);
       }
     }
+
+    fetchUsers();
   }, []);
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
-
-  const handleSave = () => {
-    setUser (editedUser );
-    setIsEditing(false);
-  };
-
-  const handleChange = (e) => {
-    const { username, value } = e.target;
-    setEditedUser ({ ...editedUser , [username]: value });
-  };
-
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setEditedUser ({ ...editedUser , photo: reader.result });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  if (!user) {
-    return <div>Loading...</div>; // Handle loading state
-  }
+  let no = 1;
 
   return (
     <Layout>
-      <h2>Pegawai</h2>
-      <div className="Pegawai">
-        <div className="profile-container">
-          <div className="profile-photo">
-            {editedUser .photo ? (
-              <img src={editedUser .photo} alt="Profile" className="profile-image" />
-            ) : (
-              <div className="placeholder-image">No Photo</div>
-            )}
-            {isEditing && (
-              <div className="input-group">
-                <label htmlFor="photo">Profile Photo</label>
-                <input
-                  type="file"
-                  id="photo"
-                  username="photo"
-                  accept="image/*"
-                  onChange={handlePhotoChange}
-                />
-              </div>
-            )}
-          </div>
-          <div className="profile-info">
-            {isEditing ? (
-              <div>
-                <div className="input-group">
-                  <label htmlFor="username">Name</label>
-                  <input
-                    type="text"
-                    id="username"
-                    username="username"
-                    value={editedUser.username}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    username="email"
-                    value={editedUser.email}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="input-group">
-                  <label htmlFor="nohp">Phone</label>
-                  <input
-                    type="text"
-                    id="nohp"
-                    username="nohp"
-                    value={editedUser.nohp}
-                    onChange={handleChange}
-                  />
-                </div>
-                <button onClick={handleSave}>Save</button>
-              </div>
-            ) : (
-              <div className='Info'>
-                <p><strong>Name:</strong> {user.username}</p>
-                <p><strong>Email:</strong> {user.email}</p>
-                <p><strong>Phone:</strong> {user.nohp}</p>
-                <button onClick={handleEdit} className="edit-btn">Edit</button>
-              </div>
-            )}
-          </div>
+      <div className="users-management">
+        <div className="users-header">
+          <h2>Daftar Pengguna</h2>
+          <button
+            className="add-user-btn"
+            onClick={() => navigate("/tambah-pg")}
+          >
+            Tambah Pengguna
+          </button>
         </div>
+        <table>
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama</th>
+              <th>No HP</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.length > 0 ? (
+              users.map((user, index) => (
+                <tr key={user.id}>
+                  <td>{no++}</td>
+                  <td>{user.nama}</td>
+                  <td>{user.no_hp}</td>
+                  <td>{user.email}</td>
+                  <td>{user.role}</td>
+                  <td>
+                    <button onClick={() => handleEdit(user.id)}>Edit</button>
+                    <button onClick={() => handleDelete(user.id)}>Hapus</button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6">Data pengguna tidak tersedia</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </Layout>
   );
-}
+
+  async function handleEdit(id) {
+    const selectedUser = users.find((user) => user.id === id);
+    navigate("/edit-pg", { state: { user: selectedUser } });
+  }
+
+  async function handleDelete(id) {
+    const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus pengguna ini?");
+    if (confirmDelete) {
+      try {
+        const response = await fetch(`http://localhost:3000/pgw/dpg/${id}`, {
+          method: "DELETE",
+        });
+        if (!response.ok) {
+          throw new Error("Gagal menghapus pengguna");
+        }
+        setUsers(users.filter((user) => user.id !== id)); // Update users setelah berhasil dihapus
+        alert("Pengguna berhasil dihapus.");
+      } catch (error) {
+        console.error("Error deleting user:", error);
+        alert("Terjadi kesalahan saat menghapus pengguna.");
+      }
+    }
+  }}
 
 export default Pegawai;

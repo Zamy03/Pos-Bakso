@@ -12,9 +12,10 @@ import TambahMenu from "./pages/menu/TambahMenu.jsx";
 import Pegawai from "./pages/pegawai/Pegawai.jsx";
 import { AuthProvider } from "./components/auth.jsx";
 import ProtectedRoute from "./components/proute.jsx";
+import TambahPegawai from "./pages/pegawai/TambahPg.jsx";
+import EditPegawai from "./pages/pegawai/EditPg.jsx";
 import EditMenu from "./pages/menu/EditMenu.jsx";
 import Register from "./pages/register/Regist.jsx";
-import Listpeg from "./pages/listpeg/listpeg.jsx";
 import Supplier from "./pages/supplier/Supplier.jsx";
 import TambahSupplier from "./pages/supplier/TambahSupplier.jsx";
 
@@ -32,9 +33,10 @@ createRoot(document.getElementById("root")).render(
           <Route path="/penjualan" element={<Penjualan />} />
           <Route path="/tambah-penjualan" element={<TambahPenjualan />} />
           <Route path="/tambah-menu" element={<TambahMenu />} />
-          <Route path="/pegawai" element={<Listpeg />} />
           <Route path="/edit-menu" element={<EditMenu />} />
           <Route path="/pegawai" element={<Pegawai />} />
+          <Route path="/tambah-pg" element={<TambahPegawai />} />
+          <Route path="/edit-pg" element={<EditPegawai />} />
           <Route path="/supplier" element={<Supplier />} />
           <Route path="/tambah-supplier" element={<TambahSupplier />} />
         </Route>
