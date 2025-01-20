@@ -18,6 +18,7 @@ import EditMenu from "./pages/menu/EditMenu.jsx";
 import Register from "./pages/register/Regist.jsx";
 import Supplier from "./pages/supplier/Supplier.jsx";
 import TambahSupplier from "./pages/supplier/TambahSupplier.jsx";
+import Cashier from "./pages/cashier/Cashier.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -39,6 +40,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/edit-pg" element={<EditPegawai />} />
           <Route path="/supplier" element={<Supplier />} />
           <Route path="/tambah-supplier" element={<TambahSupplier />} />
+          <Route path="/cashier" element={<Cashier />} />
         </Route>
       </Routes>
     </BrowserRouter>
