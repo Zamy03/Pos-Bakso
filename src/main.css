@@ -343,102 +343,104 @@ ul li:hover {
   }
 }
 
-.Pegawai {
-  max-width: 50rem;
-  margin: 20px auto;
-  padding: 2rem 1rem; /* Jarak dalam untuk layar kecil */
+.users-management {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Pusatkan semua elemen */
-  /* Media query untuk layar kecil */
+  padding: 20px;
+  /* Media queries untuk layar kecil */
 }
-.Pegawai .profile-container {
+.users-management h2 {
+  margin-bottom: 20px;
+}
+.users-management .users-header {
   display: flex;
-  flex-wrap: wrap; /* Izinkan baris baru jika layar kecil */
-  justify-content: center; /* Pusatkan kontainer pada layar kecil */
-  gap: 1.5rem; /* Jarak antar elemen di layar kecil */
+  justify-content: space-between;
+  align-items: center; /* Pastikan tombol dan ikon sejajar */
+  margin-bottom: 20px;
 }
-.Pegawai .profile-photo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height: auto;
-  width: 12rem;
-}
-.Pegawai .profile-image {
-  width: 11rem;
-  height: 11rem;
-  border-radius: 50%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.Pegawai .placeholder-image {
-  width: 11rem;
-  height: 11rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f0f0f0;
-  border-radius: 50%;
-  color: #888;
-  font-size: 0.875rem;
-}
-.Pegawai .profile-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* Jarak antar elemen */
-  max-width: 25rem;
-}
-.Pegawai .Info p {
-  margin: 0.5rem 0;
-}
-.Pegawai .input-group {
-  margin-bottom: 1rem;
-}
-.Pegawai .input-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-.Pegawai .input-group input {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-.Pegawai button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #ecf0f1;
+.users-management .users-header .add-users-btn {
   background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-.Pegawai button:hover {
+.users-management .users-header .add-users-btn:hover {
   background-color: #34495e;
   transform: scale(1.05);
 }
-.Pegawai button:active {
+.users-management .users-header .add-users-btn:active {
   transform: scale(1);
 }
+.users-management table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: left;
+  border: 1px solid #161616;
+}
+.users-management table thead tr {
+  background-color: #f4f4f4;
+}
+.users-management table thead tr th {
+  padding: 12px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+}
+.users-management table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.users-management table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+.users-management table tbody tr td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.users-management table th,
+.users-management table td {
+  text-align: center;
+}
 @media (max-width: 768px) {
-  .Pegawai .profile-container {
-    flex-direction: column; /* Tampilkan elemen dalam kolom */
+  .users-management .users-header {
+    flex-direction: column;
+    align-items: stretch;
   }
-  .Pegawai .profile-photo,
-  .Pegawai .profile-info {
-    width: 100%; /* Ambil penuh lebar layar kecil */
-    text-align: center; /* Teks rata tengah di layar kecil */
+  .users-management .users-header .add-users-btn {
+    margin-top: 10px;
+    width: 100%;
   }
-  .Pegawai .profile-info {
-    margin-top: 1rem;
+  .users-management table {
+    font-size: 14px;
+  }
+  .users-management table thead {
+    display: none;
+  }
+  .users-management table tbody tr {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .users-management table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .users-management table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 50%;
+    text-align: left;
+    display: inline-block;
   }
 }
 
@@ -1210,180 +1212,22 @@ ul li:hover {
   }
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}/*# sourceMappingURL=main.css.map */
-.layout-dashboard-sidebar {
-  width: 250px;
-  background-color: #2c3e50;
-  height: 100vh;
-  color: #ecf0f1;
-  padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  left: 0;
-  transform: translateX(0);
-  transition: transform 0.3s ease;
-}
-
-.layout-dashboard-sidebar.open {
-  transform: translateX(0); /* Sidebar terlihat */
-}
-
-.layout-dashboard-sidebar:not(.open) {
-  transform: translateX(-100%); /* Sidebar tersembunyi */
-}
-
-h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  margin-top: 5px;
-  margin-left: 3rem;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ul li {
-  font-size: 18px;
-  margin: 10px 0;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-ul li:hover {
-  background-color: #34495e;
-  color: #ecf0f1;
-}
-
-.toggle-sidebar-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  background-color: #34495e;
-  color: #ecf0f1;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1000;
-  transition: background-color 0.3s ease;
-}
-
-.toggle-sidebar-btn:hover {
-  background-color: #2c3e50;
-}
-
-@media (max-width: 768px) {
-  .layout-dashboard-sidebar {
-    width: 200px;
-  }
-  .toggle-sidebar-btn {
-    top: 20px;
-    left: 20px;
-  }
-}
-.login {
-  color: #8eb486;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden auto;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #FDF7F4;
-  height: 100vh;
-}
-.login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.login .login-card {
-  background-color: #fdf7f4;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 300px;
-}
-.login h2 {
-  text-align: center;
-  margin-bottom: 3vh;
-}
-.login .input-group {
-  margin-bottom: 3vh;
-}
-.login label {
-  display: block;
-  margin-bottom: 1vh;
-}
-.login input {
-  width: 45vh;
-  padding: 1.3vh;
-  border: 2px solid #8eb486;
-  border-radius: 1vh;
-}
-.login .submit-button {
-  width: 45vh;
-  padding: 10px;
-  background-color: #8eb486;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.login .submit-button:hover {
-  background-color: #997c70;
-}
-
-@media (max-width: 768px) {
-  .login input {
-    width: 100%;
-  }
-  .login .submit-button {
-    width: 100%;
-  }
-}
-.layout-dashboard {
-  width: 100%;
-  min-height: 100vh;
-  height: auto;
-  display: grid;
-  grid-template-areas: "sidebar content";
-  grid-template-columns: auto 1fr;
-}
-.layout-dashboard-content {
-  grid-area: content;
-  width: 100%;
-  height: auto;
-}
-
-.menu {
+.supply {
   display: flex;
   flex-direction: column;
   padding: 20px;
   /* Media queries untuk layar kecil */
 }
-.menu h2 {
+.supply h2 {
   margin-bottom: 20px;
 }
-.menu .menu-header {
+.supply .supplier-header {
   display: flex;
   justify-content: space-between;
   align-items: center; /* Pastikan tombol dan ikon sejajar */
   margin-bottom: 20px;
 }
-.menu .menu-header .add-menu-btn {
+.supply .supplier-header .add-supplier-btn {
   background-color: #2c3e50;
   color: #ecf0f1;
   padding: 10px 20px;
@@ -1394,14 +1238,14 @@ ul li:hover {
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
-.menu .menu-header .add-menu-btn:hover {
+.supply .supplier-header .add-supplier-btn:hover {
   background-color: #34495e;
   transform: scale(1.05);
 }
-.menu .menu-header .add-menu-btn:active {
+.supply .supplier-header .add-supplier-btn:active {
   transform: scale(1);
 }
-.menu table {
+.supply table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
@@ -1409,744 +1253,63 @@ ul li:hover {
   text-align: left;
   border: 1px solid #ddd;
 }
-.menu table thead tr {
+.supply table thead tr {
   background-color: #f4f4f4;
 }
-.menu table thead tr th {
+.supply table thead tr th {
   padding: 12px;
   font-weight: bold;
   color: #333;
   border-bottom: 2px solid #ccc;
 }
-.menu table tbody tr:nth-child(even) {
+.supply table tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
-.menu table tbody tr:hover {
+.supply table tbody tr:hover {
   background-color: #f1f1f1;
 }
-.menu table tbody tr td {
+.supply table tbody tr td {
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
-.menu table th,
-.menu table td {
+.supply table th,
+.supply table td {
   text-align: center;
 }
 @media (max-width: 768px) {
-  .menu .menu-header {
+  .supply .supplier-header {
     flex-direction: column;
     align-items: stretch;
   }
-  .menu .menu-header .add-menu-btn {
+  .supply .supplier-header .add-supplier-btn {
     margin-top: 10px;
     width: 100%;
   }
-  .menu table {
+  .supply table {
     font-size: 14px;
   }
-  .menu table thead {
+  .supply table thead {
     display: none;
   }
-  .menu table tbody tr {
+  .supply table tbody tr {
     display: block;
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
   }
-  .menu table tbody td {
+  .supply table tbody td {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 8px 0;
   }
-  .menu table tbody td::before {
+  .supply table tbody td::before {
     content: attr(data-label);
     font-weight: bold;
     width: 50%;
     text-align: left;
     display: inline-block;
-  }
-}
-
-.add-product-form {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fdf7f4;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  /* Responsif */
-}
-.add-product-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 1.5rem;
-}
-.add-product-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.add-product-form form label {
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
-}
-.add-product-form form label input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: border-color 0.3s ease;
-}
-.add-product-form form label input:focus {
-  outline: none;
-  border-color: #4CAF50;
-}
-.add-product-form form button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.add-product-form form button:hover {
-  background-color: #997c70;
-}
-.add-product-form form button:active {
-  background-color: #388e3c;
-}
-@media (max-width: 768px) {
-  .add-product-form {
-    padding: 15px;
-  }
-  .add-product-form h2 {
-    font-size: 1.25rem;
-  }
-  .add-product-form form {
-    gap: 10px;
-  }
-  .add-product-form form label {
-    font-size: 14px;
-  }
-  .add-product-form form label input {
-    font-size: 14px;
-    padding: 8px;
-  }
-  .add-product-form form button {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
-@media (max-width: 480px) {
-  .add-product-form form label {
-    font-size: 12px;
-  }
-  .add-product-form form label input {
-    font-size: 12px;
-    padding: 6px;
-  }
-  .add-product-form form button {
-    font-size: 12px;
-    padding: 8px;
-  }
-}
-
-.Pegawai {
-  max-width: 50rem;
-  margin: 20px auto;
-  padding: 2rem 1rem; /* Jarak dalam untuk layar kecil */
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Pusatkan semua elemen */
-  /* Media query untuk layar kecil */
-}
-.Pegawai .profile-container {
-  display: flex;
-  flex-wrap: wrap; /* Izinkan baris baru jika layar kecil */
-  justify-content: center; /* Pusatkan kontainer pada layar kecil */
-  gap: 1.5rem; /* Jarak antar elemen di layar kecil */
-}
-.Pegawai .profile-photo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  height: auto;
-  width: 12rem;
-}
-.Pegawai .profile-image {
-  width: 11rem;
-  height: 11rem;
-  border-radius: 50%;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-.Pegawai .placeholder-image {
-  width: 11rem;
-  height: 11rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f0f0f0;
-  border-radius: 50%;
-  color: #888;
-  font-size: 0.875rem;
-}
-.Pegawai .profile-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem; /* Jarak antar elemen */
-  max-width: 25rem;
-}
-.Pegawai .Info p {
-  margin: 0.5rem 0;
-}
-.Pegawai .input-group {
-  margin-bottom: 1rem;
-}
-.Pegawai .input-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-.Pegawai .input-group input {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-.Pegawai button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #ecf0f1;
-  background-color: #2c3e50;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.Pegawai button:hover {
-  background-color: #34495e;
-  transform: scale(1.05);
-}
-.Pegawai button:active {
-  transform: scale(1);
-}
-@media (max-width: 768px) {
-  .Pegawai .profile-container {
-    flex-direction: column; /* Tampilkan elemen dalam kolom */
-  }
-  .Pegawai .profile-photo,
-  .Pegawai .profile-info {
-    width: 100%; /* Ambil penuh lebar layar kecil */
-    text-align: center; /* Teks rata tengah di layar kecil */
-  }
-  .Pegawai .profile-info {
-    margin-top: 1rem;
-  }
-}
-
-.penjualan {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  /* Media queries untuk layar kecil */
-}
-.penjualan h2 {
-  margin-bottom: 20px;
-}
-.penjualan .penjualan-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Pastikan tombol dan ikon sejajar */
-  margin-bottom: 20px;
-}
-.penjualan .penjualan-header .add-penjualan-btn {
-  background-color: #2c3e50;
-  color: #ecf0f1;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.penjualan .penjualan-header .add-penjualan-btn:hover {
-  background-color: #34495e;
-  transform: scale(1.05);
-}
-.penjualan .penjualan-header .add-penjualan-btn:active {
-  transform: scale(1);
-}
-.penjualan table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  font-size: 16px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-.penjualan table thead tr {
-  background-color: #f4f4f4;
-}
-.penjualan table thead tr th {
-  padding: 12px;
-  font-weight: bold;
-  color: #333;
-  border-bottom: 2px solid #ccc;
-}
-.penjualan table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-.penjualan table tbody tr:hover {
-  background-color: #f1f1f1;
-}
-.penjualan table tbody tr td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-.penjualan table th,
-.penjualan table td {
-  text-align: center;
-}
-@media (max-width: 768px) {
-  .penjualan .penjualan-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .penjualan .penjualan-header .add-penjualan-btn {
-    margin-bottom: 10px;
-    width: 100%;
-  }
-  .penjualan table {
-    font-size: 14px;
-  }
-  .penjualan table thead {
-    display: none;
-  }
-  .penjualan table tbody tr {
-    display: block;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  .penjualan table tbody tr td {
-    display: flex;
-    padding: 8px 0;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .penjualan table tbody tr td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    width: 50px;
-    text-align: left;
-    display: inline-block;
-  }
-}
-
-.add-penjualan-form {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  /* Responsif */
-}
-.add-penjualan-form h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 1.5rem;
-}
-.add-penjualan-form form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-.add-penjualan-form form label {
-  display: flex;
-  flex-direction: column;
-  font-size: 16px;
-  color: #333;
-  font-weight: 500;
-}
-.add-penjualan-form form label input,
-.add-penjualan-form form label select {
-  width: 100%;
-  padding: 10px;
-  margin-top: 5px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  transition: border-color 0.3s ease;
-}
-.add-penjualan-form form label input:focus,
-.add-penjualan-form form label select:focus {
-  outline: none;
-  border-color: #4CAF50;
-}
-.add-penjualan-form form button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.add-penjualan-form form button:hover {
-  background-color: #45a049;
-}
-.add-penjualan-form form button:active {
-  background-color: #388e3c;
-}
-.add-penjualan-form form .produk-section {
-  display: flex;
-  gap: 10px;
-}
-.add-penjualan-form form .produk-section select,
-.add-penjualan-form form .produk-section input {
-  flex: 1;
-}
-.add-penjualan-form form .produk-section button {
-  flex: 0 0 auto;
-  padding: 0 15px;
-}
-.add-penjualan-form form .total {
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-}
-@media (max-width: 768px) {
-  .add-penjualan-form form {
-    gap: 10px;
-  }
-  .add-penjualan-form form label {
-    font-size: 14px;
-  }
-  .add-penjualan-form form label input,
-  .add-penjualan-form form label select {
-    font-size: 14px;
-  }
-  .add-penjualan-form form button {
-    font-size: 14px;
-    padding: 10px;
-  }
-  .add-penjualan-form form .produk-section {
-    flex-direction: column;
-  }
-  .add-penjualan-form form .produk-section select,
-  .add-penjualan-form form .produk-section input {
-    width: 100%;
-  }
-  .add-penjualan-form form .produk-section button {
-    width: 100%;
-    margin-top: 10px;
-  }
-  .add-penjualan-form h2 {
-    font-size: 1.25rem;
-  }
-}
-
-.pelanggan {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  /* Media queries untuk layar kecil */
-}
-.pelanggan h2 {
-  margin-bottom: 20px;
-}
-.pelanggan .pelanggan-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* Pastikan tombol dan ikon sejajar */
-  margin-bottom: 20px;
-}
-.pelanggan .pelanggan-header .add-pelanggan-btn {
-  background-color: #2c3e50;
-  color: #ecf0f1;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-.pelanggan .pelanggan-header .add-pelanggan-btn:hover {
-  background-color: #34495e;
-  transform: scale(1.05);
-}
-.pelanggan .pelanggan-header .add-pelanggan-btn:active {
-  transform: scale(1);
-}
-.pelanggan .update-btn {
-  background-color: #2196f3;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  margin-right: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.pelanggan .update-btn:hover {
-  background-color: #1976d2;
-}
-.pelanggan .delete-btn {
-  background-color: #f44336;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.pelanggan .delete-btn:hover {
-  background-color: #d32f2f;
-}
-.pelanggan table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  font-size: 16px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-.pelanggan table thead tr {
-  background-color: #f4f4f4;
-}
-.pelanggan table thead tr th {
-  padding: 12px;
-  font-weight: bold;
-  color: #333;
-  border-bottom: 2px solid #ccc;
-}
-.pelanggan table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-.pelanggan table tbody tr:hover {
-  background-color: #f1f1f1;
-}
-.pelanggan table tbody tr td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-.pelanggan table th,
-.pelanggan table td {
-  text-align: center;
-}
-@media (max-width: 768px) {
-  .pelanggan .menu-header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .pelanggan .menu-header .add-pelanggan-btn {
-    margin-top: 10px;
-    width: 100%;
-  }
-  .pelanggan table {
-    font-size: 14px;
-  }
-  .pelanggan table thead {
-    display: none;
-  }
-  .pelanggan table tbody tr {
-    display: block;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  .pelanggan table tbody td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-  }
-  .pelanggan table tbody td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    width: 50%;
-    text-align: left;
-    display: inline-block;
-  }
-}
-
-.add-pelanggan-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.add-pelanggan-form h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.add-pelanggan-form label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #555;
-}
-
-.add-pelanggan-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.button-group {
-  display: flex;
-  justify-content: space-between;
-}
-
-.save-button,
-.back-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.save-button {
-  background-color: #4caf50;
-  color: white;
-}
-
-.save-button:hover {
-  background-color: #45a049;
-}
-
-.back-button {
-  background-color: #f44336;
-  color: white;
-}
-
-.back-button:hover {
-  background-color: #d32f2f;
-}
-
-@media (max-width: 480px) {
-  .add-pelanggan-form {
-    padding: 15px;
-  }
-  .button-group {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .save-button,
-  .back-button {
-    width: 100%;
-  }
-}
-.update-pelanggan-form {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.update-pelanggan-form h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
-}
-
-.update-pelanggan-form label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #555;
-}
-
-.update-pelanggan-form input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.button-group {
-  display: flex;
-  justify-content: space-between;
-}
-
-.save-button,
-.back-button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.save-button {
-  background-color: #4caf50;
-  color: white;
-}
-
-.save-button:hover {
-  background-color: #45a049;
-}
-
-.back-button {
-  background-color: #f44336;
-  color: white;
-}
-
-.back-button:hover {
-  background-color: #d32f2f;
-}
-
-@media (max-width: 480px) {
-  .update-pelanggan-form {
-    padding: 15px;
-  }
-  .button-group {
-    flex-direction: column;
-    gap: 10px;
-  }
-  .save-button,
-  .back-button {
-    width: 100%;
   }
 }
 
@@ -2158,234 +1321,203 @@ ul li:hover {
   background-color: #fdf7f4;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
-    font-size: 1.5rem;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-
-    label {
-      display: flex;
-      flex-direction: column;
-      font-size: 16px;
-      color: #333;
-      font-weight: 500;
-
-      input {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        transition: border-color 0.3s ease;
-      }
-
-      input:focus {
-        outline: none;
-        border-color: #4CAF50;
-      }
-    }
-
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-
-      &:hover {
-        background-color: #997c70;
-      }
-
-      &:active {
-        background-color: #388e3c;
-      }
-    }
-  }
-
   /* Responsif */
-  @media (max-width: 768px) {
-    
+}
+.add-supplier-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+}
+.add-supplier-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.add-supplier-form form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+.add-supplier-form form label input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+.add-supplier-form form label input:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+.add-supplier-form form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.add-supplier-form form button:hover {
+  background-color: #997c70;
+}
+.add-supplier-form form button:active {
+  background-color: #388e3c;
+}
+@media (max-width: 768px) {
+  .add-supplier-form {
     padding: 15px;
-
-    h2 {
-      font-size: 1.25rem;
-    }
-
-    form {
-      gap: 10px;
-
-      label {
-        font-size: 14px;
-
-        input {
-          font-size: 14px;
-          padding: 8px;
-        }
-      }
-
-      button {
-        font-size: 14px;
-        padding: 10px;
-      }
-    }
   }
-
-  @media (max-width: 480px) {
-    form {
-      label {
-        font-size: 12px;
-
-        input {
-          font-size: 12px;
-          padding: 6px;
-        }
-      }
-
-      button {
-        font-size: 12px;
-        padding: 8px;
-      }
-    }
+  .add-supplier-form h2 {
+    font-size: 1.25rem;
+  }
+  .add-supplier-form form {
+    gap: 10px;
+  }
+  .add-supplier-form form label {
+    font-size: 14px;
+  }
+  .add-supplier-form form label input {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .add-supplier-form form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .add-supplier-form form label {
+    font-size: 12px;
+  }
+  .add-supplier-form form label input {
+    font-size: 12px;
+    padding: 6px;
+  }
+  .add-supplier-form form button {
+    font-size: 12px;
+    padding: 8px;
   }
 }
 
-.supply {
+.form-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.form-container form {
   display: flex;
   flex-direction: column;
+  gap: 15px;
+}
+.form-container form label {
+  font-weight: bold;
+}
+.form-container form input,
+.form-container form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.form-container form input::-moz-placeholder {
+  color: #aaa;
+}
+.form-container form input::placeholder {
+  color: #aaa;
+}
+.form-container form button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.form-container form button:first-child {
+  background-color: #2196f3;
+  color: white;
+}
+.form-container form button:first-child:hover {
+  background-color: #1e88e5;
+}
+.form-container form button:last-child {
+  background-color: #f44336;
+  color: white;
+}
+.form-container form button:last-child:hover {
+  background-color: #e53935;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 20px auto;
   padding: 20px;
-  
-  h2 {
-    margin-bottom: 20px;
-  }
-
-  .supplier-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center; /* Pastikan tombol dan ikon sejajar */
-    margin-bottom: 20px;
-
-    .add-supplier-btn {
-      background-color: #2c3e50;
-      color: #ecf0f1;
-      padding: 10px 20px;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-
-      &:hover {
-        background-color: #34495e;
-        transform: scale(1.05);
-      }
-
-      &:active {
-        transform: scale(1);
-      }
-    }
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-    font-size: 16px;
-    text-align: left;
-    border: 1px solid #ddd;
-
-    thead {
-      tr {
-        background-color: #f4f4f4;
-
-        th {
-          padding: 12px;
-          font-weight: bold;
-          color: #333;
-          border-bottom: 2px solid #ccc;
-        }
-      }
-    }
-
-    tbody {
-      tr {
-        &:nth-child(even) {
-          background-color: #f9f9f9;
-        }
-        &:hover {
-          background-color: #f1f1f1;
-        }
-
-        td {
-          padding: 10px;
-          border-bottom: 1px solid #ddd;
-        }
-      }
-    }
-
-    th,
-    td {
-      text-align: center;
-    }
-  }
-
-  /* Media queries untuk layar kecil */
-  @media (max-width: 768px) {
-    .supplier-header {
-      flex-direction: column;
-      align-items: stretch;
-
-      .add-supplier-btn {
-        margin-top: 10px;
-        width: 100%;
-      }
-    }
-
-    table {
-      font-size: 14px;
-
-      thead {
-        display: none;
-      }
-
-      tbody {
-        tr {
-          display: block;
-          margin-bottom: 10px;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          padding: 10px;
-        }
-
-        td {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 8px 0;
-        }
-
-        td::before {
-          content: attr(data-label);
-          font-weight: bold;
-          width: 50%;
-          text-align: left;
-          display: inline-block;
-        }
-      }
-    }
-  }
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.form-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form-container form label {
+  font-weight: bold;
+}
+.form-container form input,
+.form-container form select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.form-container form input::-moz-placeholder {
+  color: #aaa;
+}
+.form-container form input::placeholder {
+  color: #aaa;
+}
+.form-container form button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.form-container form button:first-child {
+  background-color: #4caf50;
+  color: white;
+}
+.form-container form button:first-child:hover {
+  background-color: #45a049;
+}
+.form-container form button:last-child {
+  background-color: #f44336;
+  color: white;
+}
+.form-container form button:last-child:hover {
+  background-color: #e53935;
 }
 
 *,
@@ -2394,4 +1526,4 @@ ul li:hover {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}/*# sourceMappingURL=main.css.map */
+}
