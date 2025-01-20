@@ -8,61 +8,65 @@ function EditMenu() {
 
   const [updatedProduct, setUpdatedProduct] = useState({
     nama_menu: product.nama_menu || "",
-    kategori: product.kategori?.nama_kategori || "", // Handle kategori field properly
+    kategori: product.kategori || "",
     harga: product.harga || "",
-    tersedia: product.tersedia || true, // Assuming 'tersedia' is a boolean
+    tersedia: product.tersedia || true,
   });
 
+  const categories = ["Makanan", "Minuman", "Snack", "Dessert", "Lainnya"];
+
   useEffect(() => {
-    // If you want to pre-fill other dynamic data, useEffect is a good place for it.
     setUpdatedProduct({
       nama_menu: product.nama_menu || "",
-      kategori: product.kategori?.nama_kategori || "",
+      kategori: product.kategori || "",
       harga: product.harga || "",
       tersedia: product.tersedia || true,
     });
   }, [product]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setUpdatedProduct({
       ...updatedProduct,
-      [name]: value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
+    // Alert konfirmasi sebelum submit
+    const confirmSubmit = window.confirm("Apakah Anda yakin ingin menyimpan perubahan menu ini?");
+    if (!confirmSubmit) return;
+
     try {
       const response = await fetch(`http://localhost:3000/api/menus/${product.id_menu}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedProduct),
       });
-  
+
       if (!response.ok) {
         throw new Error("Gagal memperbarui data menu");
       }
-  
-      const updatedMenu = await response.json(); // Mendapatkan data yang diperbarui dari server
-      alert("Produk berhasil diperbarui!");
-      navigate("/menu", { state: { updatedMenu, index } }); // Mengirimkan data yang diperbarui kembali ke halaman Menu
+
+      const updatedMenu = await response.json();
+      alert("Menu berhasil diperbarui!");
+      navigate("/menu", { state: { updatedMenu, index } });
     } catch (error) {
       console.error("Error updating menu:", error);
-      alert("Terjadi kesalahan saat memperbarui produk");
+      alert("Terjadi kesalahan saat memperbarui menu");
     }
   };
-  
 
   return (
     <div className="edit-product-form">
-      <h2>Edit Produk</h2>
+      <h2>Edit Menu</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Nama Produk:
+          Nama Menu:
           <input
             type="text"
             name="nama_menu"
@@ -73,13 +77,21 @@ function EditMenu() {
         </label>
         <label>
           Kategori:
-          <input
-            type="text"
+          <select
             name="kategori"
             value={updatedProduct.kategori}
             onChange={handleChange}
             required
-          />
+          >
+            <option value="" disabled>
+              Pilih Kategori
+            </option>
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Harga:
@@ -97,7 +109,9 @@ function EditMenu() {
             type="checkbox"
             name="tersedia"
             checked={updatedProduct.tersedia}
-            onChange={(e) => setUpdatedProduct({ ...updatedProduct, tersedia: e.target.checked })}
+            onChange={(e) =>
+              setUpdatedProduct({ ...updatedProduct, tersedia: e.target.checked })
+            }
           />
           Tersedia
         </label>

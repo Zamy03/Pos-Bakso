@@ -53,7 +53,7 @@ function Menu() {
             {menu.length > 0 ? (
               menu.map((data, index) => {
                 const nama = data.nama_menu || "Tidak Diketahui";
-                const kategori = data.kategori?.nama_kategori || "Tidak Diketahui"; // Extract category name
+                const kategori = data.kategori || "Tidak Diketahui"; // Extract category name
                 const harga = data.harga || "0";
                 const stok = data.tersedia ? "Tersedia" : "Tidak Tersedia"; // Assuming 'tersedia' indicates stock status
 
@@ -90,6 +90,10 @@ function Menu() {
   }
 
   async function handleDelete(id) {
+    // Konfirmasi penghapusan
+    const confirmDelete = window.confirm("Apakah Anda yakin ingin menghapus menu ini?");
+    if (!confirmDelete) return;
+
     try {
       const response = await fetch(`http://localhost:3000/api/menus/${id}`, {
         method: "DELETE",
@@ -100,8 +104,10 @@ function Menu() {
       // Update state after deletion
       const updatedMenu = menu.filter((item) => item.id_menu !== id);
       setMenu(updatedMenu);
+      alert("Menu berhasil dihapus!");
     } catch (error) {
       console.error("Error deleting menu:", error);
+      alert("Terjadi kesalahan saat menghapus menu");
     }
   }
 }

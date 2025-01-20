@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function TambahMenu() {
@@ -6,51 +6,12 @@ function TambahMenu() {
 
   const [newProduct, setNewProduct] = useState({
     nama_menu: "",
-    id_kategori: "",
+    kategori: "",
     harga: "",
     tersedia: true,
   });
 
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("http://localhost:3000/api/categories");
-        const data = await response.json();
-
-        // Tambahkan kategori default jika tidak ada di data API
-        const defaultCategories = [
-          { id: 1, nama_kategori: "Makanan" },
-          { id: 2, nama_kategori: "Minuman" },
-        ];
-
-        const mergedCategories = defaultCategories.concat(
-          data.filter(
-            (apiCategory) =>
-              !defaultCategories.some(
-                (defaultCategory) => defaultCategory.id === apiCategory.id
-              )
-          )
-        );
-
-        setCategories(mergedCategories);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-
-        // Fallback ke kategori default jika API gagal
-        setCategories([
-          { id: 1, nama_kategori: "Makanan" },
-          { id: 2, nama_kategori: "Minuman" },
-        ]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
+  const categories = ["Makanan", "Minuman", "Snack", "Dessert", "Lainnya"];
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -62,6 +23,10 @@ function TambahMenu() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Alert konfirmasi sebelum submit
+    const confirmSubmit = window.confirm("Apakah Anda yakin ingin menambahkan menu ini?");
+    if (!confirmSubmit) return;
 
     try {
       const response = await fetch("http://localhost:3000/api/menus", {
@@ -85,13 +50,9 @@ function TambahMenu() {
     }
   };
 
-  if (loading) {
-    return <div>Loading categories...</div>;
-  }
-
   return (
     <div className="add-product-form">
-      <h2>Tambah Produk</h2>
+      <h2>Tambah Menu</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Nama Menu:
@@ -106,17 +67,17 @@ function TambahMenu() {
         <label>
           Kategori:
           <select
-            name="id_kategori"
-            value={newProduct.id_kategori}
+            name="kategori"
+            value={newProduct.kategori}
             onChange={handleChange}
             required
           >
             <option value="" disabled>
               Pilih Kategori
             </option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.nama_kategori}
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
               </option>
             ))}
           </select>
@@ -143,7 +104,7 @@ function TambahMenu() {
           />
           Tersedia
         </label>
-        <button type="submit">Simpan Produk</button>
+        <button type="submit">Simpan Menu</button>
       </form>
     </div>
   );
