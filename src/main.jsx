@@ -6,6 +6,7 @@ import Login from "./pages/login/Login.jsx";
 import Menu from "./pages/menu/Menu.jsx";
 import Pelanggan from "./pages/pelanggan/Pelanggan.jsx";
 import TambahPelanggan from "./pages/pelanggan/TambahPelanggan.jsx";
+import UpdatePelanggan from "./pages/pelanggan/UpdatePelanggan.jsx";
 import Penjualan from "./pages/penjualan/Penjualan.jsx";
 import TambahPenjualan from "./pages/penjualan/TambahPenjualan.jsx";
 import TambahMenu from "./pages/menu/TambahMenu.jsx";
@@ -31,6 +32,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/menu" element={<Menu />} />
           <Route path="/pelanggan" element={<Pelanggan />} />
           <Route path="/tambah-pelanggan" element={<TambahPelanggan />} />
+          <Route path="/update-pelanggan" element={<UpdatePelanggan />} />
           <Route path="/penjualan" element={<Penjualan />} />
           <Route path="/tambah-penjualan" element={<TambahPenjualan />} />
           <Route path="/tambah-menu" element={<TambahMenu />} />
