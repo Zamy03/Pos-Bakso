@@ -75,7 +75,7 @@ function TambahPelanggan() {
 
     return (
         <div className="add-pelanggan-form">
-            <h2>{editingIndex !== null ? "Edit Pelanggan" : "Tambah Pelanggan"}</h2>
+            <h2>Tambah Pelanggan</h2>
             <form onSubmit={handleSubmit}>
                 <label>
                     Nama Pelanggan:
