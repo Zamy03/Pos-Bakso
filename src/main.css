@@ -1520,52 +1520,281 @@ ul li:hover {
   background-color: #e53935;
 }
 
+/* Styling utama untuk halaman */
 .cashier {
   font-family: Arial, sans-serif;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #f9f9f9;
 }
-.cashier h1 {
+
+h1 {
   text-align: center;
   color: #333;
 }
-.cashier .menu {
-  margin-top: 20px;
-}
-.cashier .menu h2 {
+
+/* Styling untuk daftar menu */
+h2 {
   color: #555;
   border-bottom: 2px solid #ddd;
   padding-bottom: 5px;
 }
-.cashier .menu .menu-grid {
+
+/* Grid untuk daftar menu agar lebih rapi */
+.menu-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
   margin-top: 20px;
 }
-.cashier .menu .menu-item {
+
+/* Styling untuk card menu */
+.menu-card {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 15px;
   text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s, box-shadow 0.2s;
+  /* Pastikan semua kartu memiliki ukuran seragam */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 180px; /* Tinggi minimal */
+  max-height: 200px; /* Tinggi maksimal */
+  width: 220px; /* Lebar seragam */
 }
-.cashier .menu .menu-item:hover {
+
+.menu-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-.cashier .menu .menu-item h3 {
+
+.menu-card h3 {
   font-size: 16px;
   margin: 10px 0;
   color: #333;
 }
-.cashier .menu .menu-item .menu-price {
+
+.menu-card p {
   font-size: 14px;
-  color: #007bff;
+  color: #777;
+  flex-grow: 1; /* Memastikan deskripsi tetap sejajar */
+}
+
+/* Tombol "Tambah" */
+.menu-card button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: auto; /* Posisi tetap di bawah */
+}
+
+.menu-card button:hover {
+  background-color: #218838;
+}
+
+/* Styling untuk keranjang */
+.cart {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart h2 {
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.cart button:hover {
+  background-color: #c82333;
+}
+
+/* Tombol Submit Transaksi */
+.cart button[disabled] {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.cart h3 {
+  text-align: right;
+  margin-top: 10px;
+}
+
+/* Styling untuk tabel transaksi */
+.transactions {
+  margin-top: 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.transactions table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.transactions th,
+.transactions td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.transactions th {
+  background: #007bff;
+  color: white;
+}
+
+/* Responsiveness untuk layar kecil */
+@media (max-width: 768px) {
+  .menu-list {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  .menu-card {
+    height: 240px;
+    width: 240px;
+    align-items: center;
+    margin-left: 60px;
+  }
+  .transactions table {
+    font-size: 14px;
+  }
+  .cart ul li {
+    flex-direction: column;
+    align-items: start;
+  }
+}
+.reservasi {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.reservasi h2 {
+  margin-bottom: 20px;
+}
+.reservasi .reservasi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.reservasi .reservasi-header .add-reservasi-btn {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  font-size: 16px;
   font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.reservasi .reservasi-header .add-reservasi-btn:hover {
+  background-color: #34495e;
+  transform: scale(1.05);
+}
+.reservasi .reservasi-header .add-reservasi-btn:active {
+  transform: scale(1);
+}
+.reservasi table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+.reservasi table thead tr {
+  background-color: #f4f4f4;
+}
+.reservasi table thead tr th {
+  padding: 12px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+}
+.reservasi table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.reservasi table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+.reservasi table tbody tr td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.reservasi table th,
+.reservasi table td {
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .reservasi .reservasi-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .reservasi .reservasi-header .add-reservasi-btn {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .reservasi table {
+    font-size: 14px;
+  }
+  .reservasi table thead {
+    display: none;
+  }
+  .reservasi table tbody tr {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .reservasi table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .reservasi table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 50%;
+    text-align: left;
+    display: inline-block;
+  }
 }
 
 *,

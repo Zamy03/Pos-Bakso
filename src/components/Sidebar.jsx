@@ -1,33 +1,40 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate(); 
 
-  // Function to handle navigation based on the selected option
+  // Ambil state sidebar dari localStorage (default true jika tidak ada data)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(
+    localStorage.getItem("sidebarOpen") === "true"
+  );
+
+  // Simpan state sidebar ke localStorage setiap kali berubah
+  useEffect(() => {
+    localStorage.setItem("sidebarOpen", isSidebarOpen);
+  }, [isSidebarOpen]);
+
+  // Function untuk menavigasi halaman
   const handleNavigation = (destination) => {
     if (destination === '/') {
-      // Show confirmation dialog for logout
       const confirmLogout = window.confirm("Apakah Kamu Yakin Ingin Logout?");
       if (confirmLogout) {
-        // If confirmed, navigate to the logout route
-        alert("Logout Berhasil!")
+        alert("Logout Berhasil!");
         navigate(destination);
       }
     } else {
-      navigate(destination); // Redirect to the specified destination
+      navigate(destination);
     }
   };
 
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true); // State to track if the sidebar is open
-
+  // Function untuk toggle sidebar
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
     <>
-      {/* Button to open sidebar */}
+      {/* Tombol untuk membuka sidebar */}
       {!isSidebarOpen && (
         <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
           ☰
@@ -40,12 +47,13 @@ function Sidebar() {
           <li onClick={() => handleNavigation('/penjualan')}>Penjualan</li>
           <li onClick={() => handleNavigation('/pelanggan')}>Pelanggan</li>
           <li onClick={() => handleNavigation('/menu')}>Produk</li>
-          {/* <li onClick={() => handleNavigation('/supplier')}>Supplier</li> */}
           <li onClick={() => handleNavigation('/pegawai')}>Pegawai</li>
           <li onClick={() => handleNavigation('/cashier')}>Kasir</li>
+          <li onClick={() => handleNavigation('/reservasi')}>Reservasi</li>
           <li onClick={() => handleNavigation('/')}>Logout</li>
         </ul>
-        {/* Button to close sidebar */}
+
+        {/* Tombol untuk menutup sidebar */}
         {isSidebarOpen && (
           <button className="toggle-sidebar-btn" onClick={toggleSidebar}>
             ✕
