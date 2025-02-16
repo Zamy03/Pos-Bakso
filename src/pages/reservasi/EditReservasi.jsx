@@ -132,6 +132,13 @@ function EditReservasi() {
           />
         </label>
         <button type="submit">Update Reservasi</button>
+        <button
+          type="button"
+          className="back-button"
+          onClick={() => navigate("/reservasi")}
+        >
+          Kembali
+        </button>
       </form>
     </div>
   );

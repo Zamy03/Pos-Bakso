@@ -136,6 +136,13 @@ function TambahReservasi() {
           </select>
         </label>
         <button type="submit">Simpan Reservasi</button>
+        <button
+          type="button"
+          className="back-button"
+          onClick={() => navigate("/reservasi")}
+        >
+          Kembali
+        </button>
       </form>
     </div>
   );
