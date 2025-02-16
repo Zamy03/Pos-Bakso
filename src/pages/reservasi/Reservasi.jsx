@@ -40,6 +40,7 @@ function Reservasi() {
               <th>No Meja</th>
               <th>Jumlah Tamu</th>
               <th>Status</th>
+              <th>Pelanggan</th>
               <th>Aksi</th>
             </tr>
           </thead>
@@ -53,6 +54,7 @@ function Reservasi() {
                   <td>{data.no_meja}</td>
                   <td>{data.jumlah_tamu}</td>
                   <td>{data.status}</td>
+                  <td>{data.pelanggan.nama}</td>
                   <td>
                     <button onClick={() => handleEdit(index)}>Edit</button>
                     <button onClick={() => handleDelete(data.id_reservasi)}>Hapus</button>

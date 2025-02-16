@@ -21,6 +21,8 @@ import Supplier from "./pages/supplier/Supplier.jsx";
 import TambahSupplier from "./pages/supplier/TambahSupplier.jsx";
 import Cashier from "./pages/cashier/Cashier.jsx";
 import Reservasi from "./pages/reservasi/Reservasi.jsx";
+import TambahReservasi from "./pages/reservasi/TambahReservasi.jsx";
+import EditReservasi from "./pages/reservasi/EditReservasi.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -45,6 +47,8 @@ createRoot(document.getElementById("root")).render(
           <Route path="/tambah-supplier" element={<TambahSupplier />} />
           <Route path="/cashier" element={<Cashier />} />
           <Route path="/reservasi" element={<Reservasi />} />
+          <Route path="/tambah-reservasi" element={<TambahReservasi />} />
+          <Route path="/edit-reservasi" element={<EditReservasi />} />
         </Route>
       </Routes>
     </BrowserRouter>
