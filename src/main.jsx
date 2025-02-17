@@ -29,6 +29,7 @@ import UpdateBahan from "./pages/bahanbaku/UpdateBahan.jsx";
 import PembelianBahanBaku from "./pages/pembelianbahanbaku/PembelianBahanBaku.jsx";
 import TambahPembelianBahanBaku from "./pages/pembelianbahanbaku/TambahPembelianBahanBaku.jsx";
 // import EditPembelianBahanBaku from "./pages/pembelianbahanbaku/EditPembelianBahanBaku.jsx";
+import Laporan from "./pages/dashboard/dashboard.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -61,6 +62,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/pembelian-bahan-baku" element={<PembelianBahanBaku />} />
           <Route path="/tambah-pembelian-bahan-baku" element={<TambahPembelianBahanBaku />} />
           {/* <Route path="/edit-pembelian-bahan-baku" element={<EditPembelianBahanBaku />} /> */}
+          <Route path="/dashboard" element={<Laporan />} />
         </Route>
       </Routes>
     </BrowserRouter>

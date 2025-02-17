@@ -27,7 +27,7 @@ function Login() {
 
       alert("Login successful!");
       setLogin(); // Update authentication state
-      navigate("/menu"); // Redirect to the menu/dashboard
+      navigate("/dashboard"); // Redirect to the menu/dashboard
     } catch (error) {
       console.error("Login error: ", error);
       setError("Invalid email or password"); // Set error message
