@@ -30,13 +30,24 @@ function TambahPembelian() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setPembelian({ ...pembelian, [name]: value });
+  
+    setPembelian((prev) => ({
+      ...prev,
+      [name]: name === "id_bahan"
+        ? parseInt(value, 10)  // Pastikan id_bahan sebagai integer
+        : name === "jumlah"
+        ? parseFloat(value) || 0  // Pastikan jumlah & harga_total sebagai float
+        : value,
+    }));
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const confirmSubmit = window.confirm("Apakah Anda yakin ingin menambahkan pembelian ini?");
     if (!confirmSubmit) return;
+
+    console.log("Data yang dikirim ke backend:", pembelian); // Debugging log
 
     try {
       const response = await fetch("http://localhost:3000/pembelian/add", {
@@ -45,14 +56,18 @@ function TambahPembelian() {
         body: JSON.stringify(pembelian),
       });
 
-      if (!response.ok) throw new Error("Gagal menambahkan pembelian");
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error Response:", errorData);
+        throw new Error(errorData.message || "Gagal menambahkan pembelian");
+      }
 
       const createdPembelian = await response.json();
       alert("Pembelian berhasil ditambahkan!");
       navigate("/pembelian-bahan-baku", { state: { createdPembelian } });
     } catch (error) {
       console.error("Error adding pembelian:", error);
-      alert("Terjadi kesalahan saat menambahkan pembelian");
+      alert("Terjadi kesalahan saat menambahkan pembelian: " + error.message);
     }
   };
 
@@ -63,7 +78,7 @@ function TambahPembelian() {
         <label>
           Jumlah:
           <input
-            type="number"
+            type="float"
             name="jumlah"
             value={pembelian.jumlah}
             onChange={handleChange}
@@ -72,13 +87,12 @@ function TambahPembelian() {
         </label>
         <label>
           Satuan:
-          <input
-            type="text"
-            name="satuan"
-            value={pembelian.satuan}
-            onChange={handleChange}
-            required
-          />
+          <select name="satuan" value={pembelian.satuan} onChange={handleChange} required>
+            <option value="gram">Gram</option>
+            <option value="kg">Kg</option>
+            <option value="liter">Liter</option>
+            <option value="pcs">Pcs</option>
+          </select>
         </label>
         <label>
           Harga Total:
