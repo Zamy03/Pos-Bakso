@@ -38,6 +38,7 @@ function Menu() {
             Tambah Menu
           </button>
         </div>
+        <div className="table-responsive">
         <table>
           <thead>
             <tr>
@@ -80,6 +81,7 @@ function Menu() {
             )}
           </tbody>
         </table>
+        </div>
       </div>
     </Layout>
   );

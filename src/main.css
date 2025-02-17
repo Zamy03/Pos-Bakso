@@ -214,6 +214,10 @@ ul li:hover {
   text-align: center;
 }
 @media (max-width: 768px) {
+  .menu .table-responsive {
+    overflow-x: auto;
+    max-width: 100%;
+  }
   .menu .menu-header {
     flex-direction: column;
     align-items: stretch;

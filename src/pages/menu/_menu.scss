@@ -80,6 +80,11 @@
 
   /* Media queries untuk layar kecil */
   @media (max-width: 768px) {
+
+    .table-responsive {
+      overflow-x: auto;
+      max-width: 100%;
+    }
     .menu-header {
       flex-direction: column;
       align-items: stretch;
