@@ -75,7 +75,7 @@ function UpdateBahan() {
         stok: "",
         satuan: "",
       });
-      navigate("/bahan");
+      navigate("/bahan-baku");
     } catch (error) {
       console.error("Error:", error);
       alert(`Error: ${error.message}`);

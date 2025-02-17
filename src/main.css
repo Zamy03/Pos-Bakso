@@ -2267,6 +2267,214 @@ h2 {
     width: 100%;
   }
 }
+.pembelian {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.pembelian h2 {
+  margin-bottom: 20px;
+}
+.pembelian .pembelian-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.pembelian .pembelian-header .add-pembelian-btn {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.pembelian .pembelian-header .add-pembelian-btn:hover {
+  background-color: #34495e;
+  transform: scale(1.05);
+}
+.pembelian .pembelian-header .add-pembelian-btn:active {
+  transform: scale(1);
+}
+.pembelian table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+.pembelian table thead tr {
+  background-color: #f4f4f4;
+}
+.pembelian table thead tr th {
+  padding: 12px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #ccc;
+}
+.pembelian table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.pembelian table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+.pembelian table tbody tr td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.pembelian table th,
+.pembelian table td {
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .pembelian .pembelian-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .pembelian .pembelian-header .add-pembelian-btn {
+    margin-top: 10px;
+    width: 100%;
+  }
+  .pembelian table {
+    font-size: 14px;
+  }
+  .pembelian table thead {
+    display: none;
+  }
+  .pembelian table tbody tr {
+    display: block;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .pembelian table tbody td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+  }
+  .pembelian table tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    width: 50%;
+    text-align: left;
+    display: inline-block;
+  }
+}
+
+.add-pembelian-form {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f0f7f4;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* Responsif */
+}
+.add-pembelian-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5rem;
+}
+.add-pembelian-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.add-pembelian-form form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+  color: #333;
+  font-weight: 500;
+}
+.add-pembelian-form form label input,
+.add-pembelian-form form label select,
+.add-pembelian-form form label textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+.add-pembelian-form form label input:focus,
+.add-pembelian-form form label select:focus,
+.add-pembelian-form form label textarea:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+.add-pembelian-form form button {
+  background-color: #2196f3;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.add-pembelian-form form button:hover {
+  background-color: #1769aa;
+}
+.add-pembelian-form form button:active {
+  background-color: #0d47a1;
+}
+.add-pembelian-form form .back-button {
+  background-color: #f44336;
+  color: white;
+}
+.add-pembelian-form form .back-button:hover {
+  background-color: #d32f2f;
+}
+@media (max-width: 768px) {
+  .add-pembelian-form {
+    padding: 15px;
+  }
+  .add-pembelian-form h2 {
+    font-size: 1.25rem;
+  }
+  .add-pembelian-form form {
+    gap: 10px;
+  }
+  .add-pembelian-form form label {
+    font-size: 14px;
+  }
+  .add-pembelian-form form label input,
+  .add-pembelian-form form label select,
+  .add-pembelian-form form label textarea {
+    font-size: 14px;
+    padding: 8px;
+  }
+  .add-pembelian-form form button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .add-pembelian-form form label {
+    font-size: 12px;
+  }
+  .add-pembelian-form form label input,
+  .add-pembelian-form form label select,
+  .add-pembelian-form form label textarea {
+    font-size: 12px;
+    padding: 6px;
+  }
+  .add-pembelian-form form button {
+    font-size: 12px;
+    padding: 8px;
+  }
+}
+
 *,
 *::before,
 *::after {

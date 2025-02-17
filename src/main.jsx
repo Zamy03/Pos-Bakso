@@ -26,6 +26,9 @@ import EditReservasi from "./pages/reservasi/EditReservasi.jsx";
 import BahanBaku from "./pages/bahanbaku/Bahanbaku.jsx";
 import TambahBahan from "./pages/bahanbaku/TambahBahan.jsx";
 import UpdateBahan from "./pages/bahanbaku/UpdateBahan.jsx";
+import PembelianBahanBaku from "./pages/pembelianbahanbaku/PembelianBahanBaku.jsx";
+import TambahPembelianBahanBaku from "./pages/pembelianbahanbaku/TambahPembelianBahanBaku.jsx";
+// import EditPembelianBahanBaku from "./pages/pembelianbahanbaku/EditPembelianBahanBaku.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -55,6 +58,9 @@ createRoot(document.getElementById("root")).render(
           <Route path="/bahan-baku" element={<BahanBaku />} />
           <Route path="/tambah-bahan" element={<TambahBahan />} />
           <Route path="/update-bahan" element={<UpdateBahan />} />
+          <Route path="/pembelian-bahan-baku" element={<PembelianBahanBaku />} />
+          <Route path="/tambah-pembelian-bahan-baku" element={<TambahPembelianBahanBaku />} />
+          {/* <Route path="/edit-pembelian-bahan-baku" element={<EditPembelianBahanBaku />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>
